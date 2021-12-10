@@ -1,0 +1,71 @@
+[tool.poetry]
+name = "ta-projekt-1"
+version = "0.0.0"
+description = "Electronic gradebook"
+authors = [
+    "Rafał Majewski <goodheropl@gmail.com>"
+]
+license = "CC0-1.0"
+readme = "README.md"
+homepage = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Majewski"
+repository = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Majewski"
+documentation = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Majewski"
+
+keywords = ["gradebook"]
+
+packages = [
+    { include = "src" },
+]
+
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+uuid = "^1.30"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+unittest = "^0.0"
+nose2 = "^0.10.0"
+tox = "^3.24.4"
+mypy = "^0.910"
+pyproject-flake8 = "^0.0.1-alpha.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py39, flake8, mypy
+skipsdist = true
+isolated_build = true
+
+[testenv:py39]
+deps =
+	pytest
+commands =
+	python -m unittest tests/Test_tests.py
+
+[testenv:flake8]
+deps =
+	flake8
+commands =
+	flake8 src --ignore=W191
+	flake8 tests --ignore=W191
+
+[testenv:mypy]
+deps =
+	mypy
+commands =
+	mypy src
+	mypy tests
+
+[gh-actions]
+python =
+	3.9: py39, flake8, mypy
+"""
+
+[tool.flake8]
+ignore = [ "W191" ]
