@@ -9,3 +9,7 @@ class Test_Gradebook(unittest.TestCase):
 	def test_constructor_correct_name(self):
 		gradebook = Gradebook(schoolName="Test")
 		self.assertEqual(gradebook.schoolName, "Test")
+
+	def test_constructor_incorrect_name(self):
+		with self.assertRaises(ValueError):
+			Gradebook(schoolName="")
