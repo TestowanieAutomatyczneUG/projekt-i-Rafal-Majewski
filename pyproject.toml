@@ -54,6 +54,7 @@ deps =
 commands =
 	flake8 src --ignore=W191
 	flake8 tests --ignore=W191
+	flake8 modules --ignore=W191
 
 [testenv:mypy]
 deps =
@@ -61,6 +62,7 @@ deps =
 commands =
 	mypy src
 	mypy tests
+	mypy modules
 
 [gh-actions]
 python =
