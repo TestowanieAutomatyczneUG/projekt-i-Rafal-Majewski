@@ -1,6 +1,14 @@
+from modules.Student import Student
+from modules.Teacher import Teacher
+from modules.Subject import Subject
+
+
 class Gradebook:
 	def __init__(self, *, schoolName: str) -> None:
 		self.schoolName = schoolName
+		self.__students = set[Student]()
+		self.__teachers = set[Teacher]()
+		self.__subjects = set[Subject]()
 
 	@property
 	def schoolName(self) -> str:
