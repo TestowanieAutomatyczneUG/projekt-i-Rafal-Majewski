@@ -26,3 +26,8 @@ class Gradebook:
 		student = Student(firstName=firstName, lastName=lastName)
 		self.__students.add(student)
 		return student
+
+	def addTeacher(self, *, firstName: str, lastName: str) -> Teacher:
+		teacher = Teacher(firstName=firstName, lastName=lastName)
+		self.__teachers.add(teacher)
+		return teacher

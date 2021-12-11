@@ -1,6 +1,7 @@
 import unittest
 from modules.Gradebook import Gradebook
 from modules.Student import Student
+from modules.Teacher import Teacher
 
 
 class Test_Gradebook_constructor(unittest.TestCase):
@@ -25,3 +26,10 @@ class Test_Gradebook_addStudent(unittest.TestCase):
 		gradebook = Gradebook(schoolName="Test")
 		student = gradebook.addStudent(firstName="Test", lastName="Test")
 		self.assertIsInstance(student, Student)
+
+
+class Test_Gradebook_addTeacher(unittest.TestCase):
+	def test_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		teacher = gradebook.addTeacher(firstName="Test", lastName="Test")
+		self.assertIsInstance(teacher, Teacher)
