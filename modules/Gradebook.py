@@ -21,3 +21,8 @@ class Gradebook:
 		if not schoolName:
 			raise ValueError("School name cannot be empty")
 		self.__schoolName = schoolName
+
+	def addStudent(self, *, firstName: str, lastName: str) -> Student:
+		student = Student(firstName=firstName, lastName=lastName)
+		self.__students.add(student)
+		return student

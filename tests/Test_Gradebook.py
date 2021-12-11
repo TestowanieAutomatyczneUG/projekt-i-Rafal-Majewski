@@ -1,5 +1,6 @@
 import unittest
 from modules.Gradebook import Gradebook
+from modules.Student import Student
 
 
 class Test_Gradebook_constructor(unittest.TestCase):
@@ -18,3 +19,9 @@ class Test_Gradebook_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Gradebook(schoolName=53)
 
+
+class Test_Gradebook_addStudent(unittest.TestCase):
+	def test_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		student = gradebook.addStudent(firstName="Test", lastName="Test")
+		self.assertIsInstance(student, Student)
