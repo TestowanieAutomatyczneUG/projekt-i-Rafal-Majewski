@@ -13,9 +13,6 @@ documentation = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Maj
 
 keywords = ["gradebook"]
 
-packages = [
-    { include = "src" },
-]
 
 
 
