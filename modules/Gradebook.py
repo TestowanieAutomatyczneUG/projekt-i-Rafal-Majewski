@@ -1,3 +1,3 @@
 class Gradebook:
-	def __init__(self) -> None:
-		raise TypeError()
+	def __init__(self, *, schoolName: str) -> None:
+		self.schoolName = schoolName
