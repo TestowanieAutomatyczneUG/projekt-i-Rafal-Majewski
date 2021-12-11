@@ -1,2 +1,3 @@
 class Gradebook:
-	pass
+	def __init__(self) -> None:
+		raise TypeError()

@@ -46,7 +46,8 @@ isolated_build = true
 deps =
 	coverage
 commands =
-	python -m coverage run --source=src -m unittest tests/Test_tests.py
+	python -m coverage run --source=modules -m unittest discover -s ./tests/ -p "Test_*.py"
+	python -m coverage report -m
 
 [testenv:flake8]
 deps =
@@ -54,6 +55,7 @@ deps =
 commands =
 	flake8 src --ignore=W191
 	flake8 tests --ignore=W191
+	flake8 modules --ignore=W191
 
 [testenv:mypy]
 deps =
@@ -61,6 +63,7 @@ deps =
 commands =
 	mypy src
 	mypy tests
+	mypy modules
 
 [gh-actions]
 python =
