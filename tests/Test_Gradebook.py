@@ -13,3 +13,7 @@ class Test_Gradebook(unittest.TestCase):
 	def test_constructor_incorrect_name(self):
 		with self.assertRaises(ValueError):
 			Gradebook(schoolName="")
+
+	def test_constructor_name_of_wrong_type(self):
+		with self.assertRaises(TypeError):
+			Gradebook(schoolName=53)
