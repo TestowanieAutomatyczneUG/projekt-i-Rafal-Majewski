@@ -13,3 +13,10 @@ class Test_Person_constructor(unittest.TestCase):
 	def test_missing_firstName(self):
 		with self.assertRaises(TypeError):
 			Person(lastName="Kowalski")
+
+
+class Test_Person_edit(unittest.TestCase):
+	def test_change_firstName(self):
+		person = Person(firstName="Jan", lastName="Kowalski")
+		person.firstName = "Adam"
+		self.assertEqual(person.firstName, "Adam")
