@@ -24,12 +24,12 @@ class Test_Gradebook_constructor(unittest.TestCase):
 class Test_Gradebook_addStudent(unittest.TestCase):
 	def test_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		student = gradebook.addStudent(firstName="Test", lastName="Test")
+		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
 		self.assertIsInstance(student, Student)
 
 
 class Test_Gradebook_addTeacher(unittest.TestCase):
 	def test_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		teacher = gradebook.addTeacher(firstName="Test", lastName="Test")
+		teacher = gradebook.addTeacher(Teacher(firstName="Test", lastName="Test"))
 		self.assertIsInstance(teacher, Teacher)

@@ -22,12 +22,10 @@ class Gradebook:
 			raise ValueError("School name cannot be empty")
 		self.__schoolName = schoolName
 
-	def addStudent(self, *, firstName: str, lastName: str) -> Student:
-		student = Student(firstName=firstName, lastName=lastName)
+	def addStudent(self, student: Student) -> Student:
 		self.__students.add(student)
 		return student
 
-	def addTeacher(self, *, firstName: str, lastName: str) -> Teacher:
-		teacher = Teacher(firstName=firstName, lastName=lastName)
+	def addTeacher(self, teacher: Teacher) -> Teacher:
 		self.__teachers.add(teacher)
 		return teacher
