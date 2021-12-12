@@ -46,3 +46,19 @@ class Test_Gradebook_removeStudent(unittest.TestCase):
 		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
 		gradebook.removeStudent(student)
 		self.assertNotIn(student, gradebook.students)
+
+
+class Test_Gradebook_students(unittest.TestCase):
+	def test_if_returns_frozenset(self):
+		gradebook = Gradebook(schoolName="Test")
+		self.assertIsInstance(gradebook.students, frozenset)
+
+	def test_if_empty_at_start(self):
+		gradebook = Gradebook(schoolName="Test")
+		self.assertFalse(gradebook.students)
+
+	def test_if_not_possible_to_add_student_directly(self):
+		gradebook = Gradebook(schoolName="Test")
+		student = Student(firstName="Test", lastName="Test")
+		with self.assertRaises(AttributeError):
+			gradebook.students.add(student)
