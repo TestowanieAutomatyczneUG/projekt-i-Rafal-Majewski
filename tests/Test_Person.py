@@ -15,7 +15,7 @@ class Test_Person_constructor(unittest.TestCase):
 			Person(lastName="Kowalski")
 
 
-class Test_Person_edit(unittest.TestCase):
+class Test_edit_Person(unittest.TestCase):
 	def test_change_firstName(self):
 		person = Person(firstName="Jan", lastName="Kowalski")
 		person.firstName = "Adam"

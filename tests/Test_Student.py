@@ -15,7 +15,7 @@ class Test_Student_constructor(unittest.TestCase):
 			Student(lastName="Kowalski")
 
 
-class Test_Student_edit(unittest.TestCase):
+class Test_edit_Student(unittest.TestCase):
 	def test_change_firstName(self):
 		student = Student(firstName="Jan", lastName="Kowalski")
 		student.firstName = "Adam"
