@@ -20,3 +20,8 @@ class Test_Person_edit(unittest.TestCase):
 		person = Person(firstName="Jan", lastName="Kowalski")
 		person.firstName = "Adam"
 		self.assertEqual(person.firstName, "Adam")
+
+	def test_change_lastName(self):
+		person = Person(firstName="Jan", lastName="Kowalski")
+		person.lastName = "Nowak"
+		self.assertEqual(person.lastName, "Nowak")
