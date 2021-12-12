@@ -29,3 +29,11 @@ class Gradebook:
 	def addTeacher(self, teacher: Teacher) -> Teacher:
 		self.__teachers.add(teacher)
 		return teacher
+
+	def removeStudent(self, student: Student) -> Student:
+		self.__students.remove(student)
+		return student
+
+	@property
+	def students(self) -> frozenset[Student]:
+		return frozenset(self.__students)

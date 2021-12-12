@@ -33,3 +33,16 @@ class Test_Gradebook_addTeacher(unittest.TestCase):
 		gradebook = Gradebook(schoolName="Test")
 		teacher = gradebook.addTeacher(Teacher(firstName="Test", lastName="Test"))
 		self.assertIsInstance(teacher, Teacher)
+
+
+class Test_Gradebook_removeStudent(unittest.TestCase):
+	def test_return_value_when_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		self.assertEqual(gradebook.removeStudent(student), student)
+
+	def test_if_removes_when_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		gradebook.removeStudent(student)
+		self.assertNotIn(student, gradebook.students)
