@@ -22,10 +22,15 @@ class Test_Gradebook_constructor(unittest.TestCase):
 
 
 class Test_Gradebook_addStudent(unittest.TestCase):
-	def test_correct(self):
+	def test_return_value_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
 		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
 		self.assertIsInstance(student, Student)
+
+	def test_if_adds_when_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		self.assertIn(student, gradebook.students)
 
 
 class Test_Gradebook_addTeacher(unittest.TestCase):
