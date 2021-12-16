@@ -2,6 +2,7 @@ import unittest
 from modules.Gradebook import Gradebook
 from modules.Student import Student
 from modules.Teacher import Teacher
+from modules.Subject import Subject
 
 
 class Test_Gradebook_constructor(unittest.TestCase):
@@ -67,3 +68,19 @@ class Test_Gradebook_students(unittest.TestCase):
 		student = Student(firstName="Test", lastName="Test")
 		with self.assertRaises(AttributeError):
 			gradebook.students.add(student)
+
+
+class Test_Gradebook_subjects(unittest.TestCase):
+	def test_if_returns_frozenset(self):
+		gradebook = Gradebook(schoolName="Test")
+		self.assertIsInstance(gradebook.subjects, frozenset)
+
+	def test_if_empty_at_start(self):
+		gradebook = Gradebook(schoolName="Test")
+		self.assertFalse(gradebook.subjects)
+
+	def test_if_not_possible_to_add_subject_directly(self):
+		gradebook = Gradebook(schoolName="Test school")
+		subject = Subject(name="Test subject")
+		with self.assertRaises(AttributeError):
+			gradebook.subjects.add(subject)

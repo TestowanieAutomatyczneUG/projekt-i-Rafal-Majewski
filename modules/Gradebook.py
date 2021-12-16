@@ -37,3 +37,7 @@ class Gradebook:
 	@property
 	def students(self) -> frozenset[Student]:
 		return frozenset(self.__students)
+
+	@property
+	def subjects(self) -> frozenset[Subject]:
+		return frozenset(self.__subjects)

@@ -1,2 +1,3 @@
 class Subject:
-	pass
+	def __init__(self, name: str) -> None:
+		pass
