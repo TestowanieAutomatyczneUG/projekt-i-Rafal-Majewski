@@ -2,7 +2,7 @@ from datetime import datetime as Datetime
 
 
 class Entry:
-	def __init__(self, datetime: Datetime) -> None:
+	def __init__(self, *, datetime: Datetime) -> None:
 		self.datetime = datetime
 
 	@property
