@@ -1,2 +1,4 @@
 def validatePesel(pesel: str):
-	return False
+	if len(pesel) != 11:
+		return False
+	return True
