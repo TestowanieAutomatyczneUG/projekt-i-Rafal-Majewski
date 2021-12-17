@@ -37,3 +37,9 @@ class Test_assign_subject_toStudent(unittest.TestCase):
 			subjects=set([subject])
 		)
 		self.assertIn(subject, student.subjects)
+
+	def test_correct_manually(self):
+		subject = Subject(name="Matematyka")
+		student = Student(firstName="Jan", lastName="Kowalski")
+		student.assignSubject(subject)
+		self.assertIn(subject, student.subjects)
