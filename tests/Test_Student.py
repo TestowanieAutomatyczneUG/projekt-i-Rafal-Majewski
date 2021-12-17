@@ -1,5 +1,6 @@
 import unittest
 from modules.Student import Student
+from modules.Subject import Subject
 
 
 class Test_Student_constructor(unittest.TestCase):
@@ -25,3 +26,14 @@ class Test_edit_Student(unittest.TestCase):
 		student = Student(firstName="Jan", lastName="Kowalski")
 		student.lastName = "Nowak"
 		self.assertEqual(student.lastName, "Nowak")
+
+
+class Test_assign_subject_toStudent(unittest.TestCase):
+	def test_correct_in_constructor(self):
+		subject = Subject(name="Matematyka")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			subjects=set([subject])
+		)
+		self.assertIn(subject, student.subjects)
