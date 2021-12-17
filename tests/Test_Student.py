@@ -43,3 +43,8 @@ class Test_assign_subject_toStudent(unittest.TestCase):
 		student = Student(firstName="Jan", lastName="Kowalski")
 		student.assignSubject(subject)
 		self.assertIn(subject, student.subjects)
+
+	def test_incorrect_manually(self):
+		subject = 2
+		student = Student(firstName="Jan", lastName="Kowalski")
+		self.assertRaises(TypeError, student.assignSubject, subject)

@@ -11,9 +11,14 @@ class Student(Person):
 		subjects: set[Subject] = None
 	) -> None:
 		super().__init__(firstName=firstName, lastName=lastName)
-		self.__subjects = set[Subject]() if subjects is None else subjects
+		self.__subjects = set[Subject]()
+		if subjects is not None:
+			for subject in subjects:
+				self.assignSubject(subject)
 
 	def assignSubject(self, subject: Subject) -> None:
+		if not isinstance(subject, Subject):
+			raise TypeError("Subject must be an instance of Subject class.")
 		self.__subjects.add(subject)
 
 	@property
