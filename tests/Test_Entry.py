@@ -11,3 +11,8 @@ class Test_Entry_constructor(unittest.TestCase):
 		datetime = Datetime(year=2020, month=1, day=1)
 		entry = Entry(datetime)
 		self.assertEqual(entry.datetime, datetime)
+
+	def test_incorrect_datetime(self):
+		datetime = "Jan 01 2020"
+		with self.assertRaises(TypeError):
+			Entry(datetime)

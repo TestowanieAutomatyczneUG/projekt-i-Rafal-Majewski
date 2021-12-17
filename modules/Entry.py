@@ -11,4 +11,6 @@ class Entry:
 
 	@datetime.setter
 	def datetime(self, datetime: Datetime) -> None:
+		if not isinstance(datetime, Datetime):
+			raise TypeError("Datetime must be an instance of Datetime class.")
 		self.__datetime = datetime
