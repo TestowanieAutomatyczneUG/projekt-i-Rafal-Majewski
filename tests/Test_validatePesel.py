@@ -14,3 +14,6 @@ class Test_validatePesel(unittest.TestCase):
 
 	def test_incorrect_month(self):
 		self.assertFalse(validatePesel("97142537969"))
+
+	def test_incorrect_day(self):
+		self.assertFalse(validatePesel("97093537961"))
