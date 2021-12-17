@@ -11,3 +11,6 @@ class Test_validatePesel(unittest.TestCase):
 
 	def test_non_digit(self):
 		self.assertFalse(validatePesel("9709a537961"))
+
+	def test_incorrect_month(self):
+		self.assertFalse(validatePesel("97142537969"))
