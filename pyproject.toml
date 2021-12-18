@@ -58,6 +58,7 @@ basepython = python3.9
 deps =
 	coverage
 	parameterized
+	PyHamcrest
 commands =
 	python -m coverage run --source=modules -m unittest discover -s ./tests/ -p "Test_*.py"
 	python -m coverage report -m
