@@ -3,10 +3,8 @@ from calendar import monthrange
 
 def _calculatePeselChecksum(peselPart: str):
 	weighths = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
-	checksum = (
-		10 - sum(
-			weight * int(digit) for weight, digit in zip(weighths, peselPart)
-		) % 10
+	checksum = 10 - sum(
+		weight * int(digit) for weight, digit in zip(weighths, peselPart)
 	) % 10
 	return checksum
 
