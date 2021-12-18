@@ -39,11 +39,23 @@ build-backend = "poetry.core.masonry.api"
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = py39, flake8, mypy
+envlist = python-3-9-unittest, python-3-9-doctest, flake8, mypy
 skipsdist = true
 isolated_build = true
 
-[testenv:py39]
+
+[testenv:python-3-9-doctest]
+basepython = python3.9
+whitelist_externals = 
+	find
+	bash
+	echo
+commands = 
+	bash -c \"find modules -name '*.py' | rev | cut -c 4- | rev | tr '/' '.' | xargs -L 1 python -m\"
+
+
+[testenv:python-3-9-unittest]
+basepython = python3.9
 deps =
 	coverage
 	parameterized
@@ -52,6 +64,7 @@ commands =
 	python -m coverage report -m
 
 [testenv:flake8]
+basepython = python3.9
 deps =
 	flake8
 commands =
@@ -60,6 +73,7 @@ commands =
 	flake8 modules --ignore=W191
 
 [testenv:mypy]
+basepython = python3.9
 deps =
 	mypy
 commands =
@@ -69,7 +83,7 @@ commands =
 
 [gh-actions]
 python =
-	3.9: py39, flake8, mypy
+	3.9: python-3-9-unittest, python-3-9-doctest, flake8, mypy
 """
 
 [tool.flake8]

@@ -20,6 +20,14 @@ def calculatePeselChecksum(peselPart: str):
 
 
 def validatePesel(pesel: str):
+	"""
+	>>> validatePesel("95092971213")
+	True
+	>>> validatePesel("95173378812")
+	False
+	>>> validatePesel("9509297")
+	False
+	"""
 	if len(pesel) != 11:
 		return False
 	if not pesel.isdigit():
@@ -40,3 +48,10 @@ def validatePesel(pesel: str):
 	if calculatePeselChecksum(pesel[:-1]) != int(pesel[-1]):
 		return False
 	return True
+
+
+if __name__ == "__main__":
+	import doctest
+	import sys
+	if doctest.testmod().failed:
+		sys.exit(1)
