@@ -49,7 +49,6 @@ basepython = python3.9
 whitelist_externals = 
 	find
 	bash
-	echo
 commands = 
 	bash -c \"find modules -name '*.py' | rev | cut -c 4- | rev | tr '/' '.' | xargs -L 1 python -m\"
 
