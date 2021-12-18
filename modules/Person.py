@@ -1,7 +1,11 @@
+from modules.utils import validatePesel
+
+
 class Person:
-	def __init__(self, *, firstName: str, lastName: str) -> None:
+	def __init__(self, *, firstName: str, lastName: str, pesel: str) -> None:
 		self.firstName = firstName
 		self.lastName = lastName
+		self.pesel = pesel
 
 	@property
 	def firstName(self) -> str:
@@ -18,3 +22,13 @@ class Person:
 	@lastName.setter
 	def lastName(self, lastName: str) -> None:
 		self.__lastName = lastName
+
+	@property
+	def pesel(self) -> str:
+		return self.__pesel
+
+	@pesel.setter
+	def pesel(self, pesel: str) -> None:
+		if not validatePesel(pesel):
+			raise ValueError("Invalid PESEL")
+		self.__pesel = pesel

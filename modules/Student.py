@@ -8,9 +8,10 @@ class Student(Person):
 		*,
 		firstName: str,
 		lastName: str,
+		pesel: str,
 		subjects: set[Subject] = None
 	) -> None:
-		super().__init__(firstName=firstName, lastName=lastName)
+		super().__init__(firstName=firstName, lastName=lastName, pesel=pesel)
 		self.__subjects = set[Subject]()
 		if subjects is not None:
 			for subject in subjects:

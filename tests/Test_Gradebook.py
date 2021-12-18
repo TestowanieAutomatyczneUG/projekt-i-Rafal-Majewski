@@ -25,31 +25,41 @@ class Test_Gradebook_constructor(unittest.TestCase):
 class Test_Gradebook_addStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		student = gradebook.addStudent(Student(
+			firstName="Test", lastName="Test", pesel="85052342517"
+		))
 		self.assertIsInstance(student, Student)
 
 	def test_if_adds_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		student = gradebook.addStudent(Student(
+			firstName="Test", lastName="Test", pesel="85052342517"
+		))
 		self.assertIn(student, gradebook.students)
 
 
 class Test_Gradebook_addTeacher(unittest.TestCase):
 	def test_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		teacher = gradebook.addTeacher(Teacher(firstName="Test", lastName="Test"))
+		teacher = gradebook.addTeacher(Teacher(
+			firstName="Test", lastName="Test", pesel="85052342517"
+		))
 		self.assertIsInstance(teacher, Teacher)
 
 
 class Test_Gradebook_removeStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		student = gradebook.addStudent(Student(
+			firstName="Test", lastName="Test", pesel="85052342517"
+		))
 		self.assertEqual(gradebook.removeStudent(student), student)
 
 	def test_if_removes_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
-		student = gradebook.addStudent(Student(firstName="Test", lastName="Test"))
+		student = gradebook.addStudent(Student(
+			firstName="Test", lastName="Test", pesel="85052342517"
+		))
 		gradebook.removeStudent(student)
 		self.assertNotIn(student, gradebook.students)
 
@@ -65,7 +75,7 @@ class Test_Gradebook_students(unittest.TestCase):
 
 	def test_if_not_possible_to_add_student_directly(self):
 		gradebook = Gradebook(schoolName="Test")
-		student = Student(firstName="Test", lastName="Test")
+		student = Student(firstName="Test", lastName="Test", pesel="85052342517")
 		with self.assertRaises(AttributeError):
 			gradebook.students.add(student)
 
