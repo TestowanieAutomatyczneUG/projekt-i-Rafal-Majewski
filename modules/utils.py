@@ -48,7 +48,7 @@ def validatePesel(pesel: str):
 	day = int(pesel[4:6])
 	if day == 0 or day > monthrange(year, month)[1]:
 		return False
-	if calculatePeselChecksum(pesel[:-1]) != int(pesel[-1]):
+	if _calculatePeselChecksum(pesel[:-1]) != int(pesel[-1]):
 		return False
 	return True
 
