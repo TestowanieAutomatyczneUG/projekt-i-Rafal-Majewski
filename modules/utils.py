@@ -1,6 +1,26 @@
 from calendar import monthrange
 
 
+def _calculatePeselChecksum(peselPart: str):
+	weighths = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
+	checksum = (
+		10 - sum(
+			weight * int(digit) for weight, digit in zip(weighths, peselPart)
+		) % 10
+	) % 10
+	return checksum
+
+
+def calculatePeselChecksum(peselPart: str):
+	if not isinstance(peselPart, str):
+		raise TypeError("Pesel part must be a string.")
+	if not peselPart.isdigit():
+		raise ValueError("Pesel part must be a string of digits.")
+	if len(peselPart) != 10:
+		raise ValueError("Pesel part must be 10 characters long.")
+	return _calculatePeselChecksum(peselPart)
+
+
 def validatePesel(pesel: str):
 	if len(pesel) != 11:
 		return False
