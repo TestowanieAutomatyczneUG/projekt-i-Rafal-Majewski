@@ -21,6 +21,9 @@ def calculatePeselChecksum(peselPart: str):
 
 def validatePesel(pesel: str):
 	"""
+	Validates a PESEL number according to
+	https://en.wikipedia.org/wiki/PESEL#Format.
+
 	>>> validatePesel("95092971213")
 	True
 	>>> validatePesel("95173378812")
