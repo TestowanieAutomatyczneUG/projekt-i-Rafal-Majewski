@@ -42,7 +42,7 @@ class Test_assign_subject_to_Student(unittest.TestCase):
 	def test_return_value(self):
 		subject = Subject(name="Matematyka")
 		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
-		self.assertEqual(student.assignSubject(subject), subject)
+		self.assertIs(student.assignSubject(subject), subject)
 
 	def test_correct_manually(self):
 		subject = Subject(name="Matematyka")
@@ -75,4 +75,4 @@ class Test_unassign_subject_from_Student(unittest.TestCase):
 			pesel="85052342517",
 			subjects=set([subject])
 		)
-		self.assertEqual(student.unassignSubject(subject), subject)
+		self.assertIs(student.unassignSubject(subject), subject)
