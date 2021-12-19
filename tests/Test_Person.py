@@ -14,6 +14,10 @@ class Test_Person_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Person(lastName="Kowalski")
 
+	def test_incorrect_pesel(self):
+		with self.assertRaises(ValueError):
+			Person(firstName="Jan", lastName="Kowalski", pesel="85052342518")
+
 	def test_pesel_getter(self):
 		person = Person(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		self.assertEqual(person.pesel, "85052342517")
