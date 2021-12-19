@@ -21,3 +21,9 @@ class Test_Entry_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			datetime = Datetime(year=2020, month=1, day=1)
 			Entry(datetime)
+
+	def test_incorrect_datetime_changed_manually(self):
+		datetime = Datetime(year=2020, month=1, day=1)
+		entry = Entry(datetime=datetime)
+		with self.assertRaises(TypeError):
+			entry.datetime = "Jan 01 2020"
