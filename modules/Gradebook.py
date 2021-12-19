@@ -34,9 +34,6 @@ class Gradebook:
 		self.__students.remove(student)
 		return student
 
-	def assignSubjectToStudent(self, student: Student, subject: Subject) -> None:
-		student.assignSubject(subject)
-
 	@property
 	def students(self) -> frozenset[Student]:
 		return frozenset(self.__students)
