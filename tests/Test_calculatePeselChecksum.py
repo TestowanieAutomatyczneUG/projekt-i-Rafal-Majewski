@@ -18,3 +18,7 @@ class Test_validatePesel(unittest.TestCase):
 	])
 	def test_correct(self, peselPart: str, expectedChecksum: int):
 		self.assertEqual(calculatePeselChecksum(peselPart), expectedChecksum)
+
+	def test_incorrect_type(self):
+		with self.assertRaises(TypeError):
+			calculatePeselChecksum(1)
