@@ -49,3 +49,25 @@ class Test_assign_subject_to_Student(unittest.TestCase):
 		subject = 2
 		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		self.assertRaises(TypeError, student.assignSubject, subject)
+
+
+class Test_unassign_subject_from_Student(unittest.TestCase):
+	def test_if_removes_from_subjects(self):
+		subject = Subject(name="Matematyka")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=set([subject])
+		)
+		student.unassignSubject(subject)
+
+	def test_return_value(self):
+		subject = Subject(name="Matematyka")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=set([subject])
+		)
+		self.assertEqual(student.unassignSubject(subject), subject)

@@ -22,6 +22,12 @@ class Student(Person):
 			raise TypeError("Subject must be an instance of Subject class.")
 		self.__subjects.add(subject)
 
+	def unassignSubject(self, subject: Subject) -> Subject:
+		if not isinstance(subject, Subject):
+			raise TypeError("Subject must be an instance of Subject class.")
+		self.__subjects.remove(subject)
+		return subject
+
 	@property
 	def subjects(self) -> frozenset[Subject]:
 		return frozenset(self.__subjects)
