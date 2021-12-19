@@ -39,6 +39,11 @@ class Test_assign_subject_to_Student(unittest.TestCase):
 		)
 		self.assertIn(subject, student.subjects)
 
+	def test_return_value(self):
+		subject = Subject(name="Matematyka")
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		self.assertEqual(student.assignSubject(subject), subject)
+
 	def test_correct_manually(self):
 		subject = Subject(name="Matematyka")
 		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")

@@ -17,10 +17,11 @@ class Student(Person):
 			for subject in subjects:
 				self.assignSubject(subject)
 
-	def assignSubject(self, subject: Subject) -> None:
+	def assignSubject(self, subject: Subject) -> Subject:
 		if not isinstance(subject, Subject):
 			raise TypeError("Subject must be an instance of Subject class.")
 		self.__subjects.add(subject)
+		return subject
 
 	def unassignSubject(self, subject: Subject) -> Subject:
 		if not isinstance(subject, Subject):
