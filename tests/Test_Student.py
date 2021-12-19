@@ -28,7 +28,7 @@ class Test_edit_Student(unittest.TestCase):
 		self.assertEqual(student.lastName, "Nowak")
 
 
-class Test_assign_subject_toStudent(unittest.TestCase):
+class Test_assign_subject_to_Student(unittest.TestCase):
 	def test_correct_in_constructor(self):
 		subject = Subject(name="Matematyka")
 		student = Student(
