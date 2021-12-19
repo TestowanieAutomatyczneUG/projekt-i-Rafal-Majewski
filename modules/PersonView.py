@@ -1,2 +1,7 @@
+from modules.Person import Person
+from modules.Gradebook import Gradebook
+
+
 class PersonView:
-	pass
+	def __init__(self, gradebook: Gradebook, person: Person) -> None:
+		pass
