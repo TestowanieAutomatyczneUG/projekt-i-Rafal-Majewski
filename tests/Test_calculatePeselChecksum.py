@@ -22,3 +22,7 @@ class Test_validatePesel(unittest.TestCase):
 	def test_incorrect_type(self):
 		with self.assertRaises(TypeError):
 			calculatePeselChecksum(1)
+
+	def test_contains_non_digit(self):
+		with self.assertRaises(ValueError):
+			calculatePeselChecksum("8410031846a")
