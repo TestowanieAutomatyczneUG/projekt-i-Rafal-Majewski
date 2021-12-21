@@ -39,29 +39,20 @@ build-backend = "poetry.core.masonry.api"
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = python-3-9-unittest, python-3-9-doctest, flake8, mypy
+envlist = python-3-9, flake8, mypy
 skipsdist = true
 isolated_build = true
 
 
-[testenv:python-3-9-doctest]
-basepython = python3.9
-whitelist_externals = 
-	find
-	bash
-commands = 
-	bash -c \"find modules -name '*.py' | rev | cut -c 4- | rev | tr '/' '.' | xargs -L 1 python -m\"
-
-
-[testenv:python-3-9-unittest]
+[testenv:python-3-9]
 basepython = python3.9
 deps =
 	coverage
 	parameterized
 	PyHamcrest
+	nose-cprof
 commands =
-	python -m coverage run --source=modules -m unittest discover -s ./tests/ -p "Test_*.py"
-	python -m coverage report -m
+	nosetests --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
 
 [testenv:flake8]
 basepython = python3.9
@@ -83,7 +74,7 @@ commands =
 
 [gh-actions]
 python =
-	3.9: python-3-9-unittest, python-3-9-doctest, flake8, mypy
+	3.9: python-3-9, python-3-9-doctest, flake8, mypy
 """
 
 [tool.flake8]
