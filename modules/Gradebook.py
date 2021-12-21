@@ -5,10 +5,13 @@ from modules.Subject import Subject
 
 class Gradebook:
 	def __init__(self, *, schoolName: str, subjects: set[Subject] = None) -> None:
+		self.__subjects = set[Subject]()
+		if subjects is not None:
+			for subject in subjects:
+				self.addSubject(subject)
 		self.schoolName = schoolName
 		self.__students = set[Student]()
 		self.__teachers = set[Teacher]()
-		self.__subjects = set[Subject]() if subjects is None else subjects
 
 	@property
 	def schoolName(self) -> str:
@@ -25,6 +28,10 @@ class Gradebook:
 	def addStudent(self, student: Student) -> Student:
 		self.__students.add(student)
 		return student
+
+	def addSubject(self, subject: Subject) -> Subject:
+		self.__subjects.add(subject)
+		return subject
 
 	def addTeacher(self, teacher: Teacher) -> Teacher:
 		self.__teachers.add(teacher)

@@ -30,6 +30,10 @@ class Test_Gradebook_constructor(unittest.TestCase):
 		gradebook = Gradebook(schoolName="Test", subjects=subjects)
 		self.assertEqual(gradebook.subjects, subjects)
 
+	def test_with_subjects_of_wrong_type(self):
+		with self.assertRaises(TypeError):
+			Gradebook(schoolName="Test", subjects=53)
+
 
 class Test_Gradebook_addStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
