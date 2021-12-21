@@ -16,6 +16,19 @@ class Test_Student_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Student(lastName="Kowalski")
 
+	def test_with_subjects(self):
+		subjects = set([
+			Subject(name="Math"),
+			Subject(name="Physics"),
+		])
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=subjects
+		)
+		self.assertEqual(student.subjects, subjects)
+
 
 class Test_edit_Student(unittest.TestCase):
 	def test_change_firstName(self):
