@@ -5,7 +5,7 @@ from datetime import datetime as Datetime
 class Comment(Entry):
 	def __init__(self, *, datetime: Datetime, content: str) -> None:
 		super().__init__(datetime=datetime)
-		self.__content = content
+		self.content = content
 
 	@property
 	def content(self) -> str:

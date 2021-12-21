@@ -12,3 +12,9 @@ class Test_Comment_constructor(unittest.TestCase):
 		content = "Test content"
 		comment = Comment(datetime=datetime, content=content)
 		self.assertEqual(comment.content, content)
+
+	def test_wrong_content_type(self):
+		datetime = Datetime(year=2020, month=1, day=1)
+		content = 1
+		with self.assertRaises(TypeError):
+			Comment(datetime=datetime, content=content)
