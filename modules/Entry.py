@@ -1,4 +1,5 @@
 from datetime import datetime as Datetime
+from abc import ABC
 
 
 class Entry:
