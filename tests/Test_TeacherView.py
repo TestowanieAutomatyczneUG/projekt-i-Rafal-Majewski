@@ -169,3 +169,30 @@ class Test_takeGrade(unittest.TestCase):
 		teacherView.giveGrade(student, grade)
 		teacherView.takeGrade(student, grade)
 		self.assertNotIn(grade, student.grades)
+
+	def test_wrong_subject(self):
+		subject = Subject(name="Math")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+			subjects=[subject]
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		grade = Grade(
+			teacher=teacher,
+			subject=subject,
+			datetime=datetime,
+			value=GradeValue.G3PLUS
+		)
+		teacherView.giveGrade(student, grade)
+		student.removeSubject(subject)
+		with self.assertRaises(ValueError):
+			teacherView.takeGrade(student, grade)
