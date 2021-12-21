@@ -2,7 +2,7 @@ from datetime import datetime as Datetime
 from abc import ABC
 
 
-class Entry:
+class Entry(ABC):
 	def __init__(self, *, datetime: Datetime) -> None:
 		self.datetime = datetime
 
