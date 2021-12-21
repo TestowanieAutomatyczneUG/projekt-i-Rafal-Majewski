@@ -48,7 +48,7 @@ class Test_TeacherView_giveGrade(unittest.TestCase):
 		)
 		self.assertIs(teacherView.giveGrade(student, grade), grade)
 
-	def test_wrong_teacher(self):
+	def test_wrong_subject(self):
 		subject = Subject(name="Math")
 		student = Student(
 			firstName="Jan",
