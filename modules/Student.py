@@ -42,3 +42,7 @@ class Student(Person):
 	def removeGrade(self, grade: Grade) -> Grade:
 		self.__grades.remove(grade)
 		return grade
+
+	@property
+	def grades(self) -> frozenset[Grade]:
+		return frozenset(self.__grades)

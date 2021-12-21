@@ -118,3 +118,28 @@ class Test_takeGrade(unittest.TestCase):
 		)
 		student.addGrade(grade)
 		self.assertIs(teacherView.takeGrade(student, grade), grade)
+
+	def test_if_adds(self):
+		subject = Subject(name="Math")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+			subjects=[subject]
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		grade = Grade(
+			teacher=teacher,
+			subject=subject,
+			datetime=datetime,
+			value=GradeValue.G3PLUS
+		)
+		teacherView.giveGrade(student, grade)
+		self.assertIn(grade, student.grades)
