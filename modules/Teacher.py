@@ -24,3 +24,7 @@ class Teacher(Person):
 	def addSubject(self, subject: Subject) -> Subject:
 		self.__subjects.add(subject)
 		return subject
+
+	def unassignSubject(self, subject: Subject) -> Subject:
+		self.__subjects.remove(subject)
+		return subject
