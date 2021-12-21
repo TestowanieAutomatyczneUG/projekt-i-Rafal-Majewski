@@ -1,7 +1,8 @@
 from modules.utils import validatePesel
+from abc import ABC
 
 
-class Person:
+class Person(ABC):
 	def __init__(self, *, firstName: str, lastName: str, pesel: str) -> None:
 		self.firstName = firstName
 		self.lastName = lastName
