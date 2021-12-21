@@ -32,3 +32,13 @@ class Test_validatePesel(unittest.TestCase):
 
 	def test_too_long(self):
 		assert_that(validatePesel("1234567890123"), is_(False))
+
+	def test_many_valid_pesels(self):
+		pesels = []
+		with open("./tests/data/valid_pesels.txt") as file:
+			for line in file:
+				trimmedLine = line.strip()
+				if trimmedLine:
+					pesels.append(trimmedLine)
+		for pesel in pesels:
+			assert_that(validatePesel(pesel), is_(True))
