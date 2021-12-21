@@ -9,3 +9,7 @@ class Test_Subject_constructor(unittest.TestCase):
 	def test_name(self):
 		subject = Subject(name="Math")
 		self.assertEqual(subject.name, "Math")
+
+	def test_incorrect_name(self):
+		with self.assertRaises(TypeError):
+			Subject(name=123)
