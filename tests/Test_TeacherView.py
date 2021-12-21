@@ -193,6 +193,6 @@ class Test_takeGrade(unittest.TestCase):
 			value=GradeValue.G3PLUS
 		)
 		teacherView.giveGrade(student, grade)
-		student.removeSubject(subject)
+		student.unassignSubject(subject)
 		with self.assertRaises(ValueError):
 			teacherView.takeGrade(student, grade)
