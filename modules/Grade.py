@@ -17,3 +17,7 @@ class Grade(Entry):
 		self.__subject = subject
 		self.__teacher = teacher
 		self.__value = value
+
+	@property
+	def subject(self) -> Subject:
+		return self.__subject
