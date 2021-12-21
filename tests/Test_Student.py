@@ -5,7 +5,8 @@ from modules.Subject import Subject
 
 class Test_Student_constructor(unittest.TestCase):
 	def test_no_arguments(self):
-		self.assertRaises(TypeError, Student, [])
+		with self.assertRaises(TypeError):
+			Student()
 
 	def test_only_firstName(self):
 		with self.assertRaises(TypeError):
