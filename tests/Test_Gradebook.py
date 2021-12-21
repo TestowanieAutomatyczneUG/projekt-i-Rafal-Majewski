@@ -21,6 +21,15 @@ class Test_Gradebook_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Gradebook(schoolName=53)
 
+	def test_with_subjects(self):
+		subjects = set([
+			Subject(name="Math"),
+			Subject(name="Physics"),
+			Subject(name="Chemistry"),
+		])
+		gradebook = Gradebook(schoolName="Test", subjects=subjects)
+		self.assertEqual(gradebook.subjects, subjects)
+
 
 class Test_Gradebook_addStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
