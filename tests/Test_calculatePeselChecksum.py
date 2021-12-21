@@ -26,3 +26,7 @@ class Test_validatePesel(unittest.TestCase):
 	def test_contains_non_digit(self):
 		with self.assertRaises(ValueError):
 			calculatePeselChecksum("8410031846a")
+
+	def test_too_long(self):
+		with self.assertRaises(ValueError):
+			calculatePeselChecksum("8410031846121111")
