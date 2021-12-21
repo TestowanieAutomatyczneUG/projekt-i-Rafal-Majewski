@@ -53,7 +53,7 @@ def validatePesel(pesel: str):
 	return True
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
 	import doctest
 	import sys
 	if doctest.testmod().failed:
