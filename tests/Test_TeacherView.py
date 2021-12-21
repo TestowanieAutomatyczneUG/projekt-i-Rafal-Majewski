@@ -116,7 +116,7 @@ class Test_takeGrade(unittest.TestCase):
 			datetime=datetime,
 			value=GradeValue.G3PLUS
 		)
-		student.addGrade(grade)
+		teacherView.giveGrade(student, grade)
 		self.assertIs(teacherView.takeGrade(student, grade), grade)
 
 	def test_if_adds(self):
