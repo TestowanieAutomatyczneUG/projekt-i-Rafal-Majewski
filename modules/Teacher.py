@@ -17,7 +17,6 @@ class Teacher(Person):
 				self.addSubject(subject)
 		super().__init__(firstName=firstName, lastName=lastName, pesel=pesel)
 
-
 	@property
 	def subjects(self) -> frozenset[Subject]:
 		return frozenset(self.__subjects)
