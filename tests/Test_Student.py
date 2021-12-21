@@ -67,6 +67,15 @@ class Test_unassign_subject_from_Student(unittest.TestCase):
 		)
 		student.unassignSubject(subject)
 
+	def test_wrong_type(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517"
+		)
+		with self.assertRaises(TypeError):
+			student.unassignSubject("informatyka")
+
 	def test_return_value(self):
 		subject = Subject(name="Matematyka")
 		student = Student(
