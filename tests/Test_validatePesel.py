@@ -32,3 +32,6 @@ class Test_validatePesel(unittest.TestCase):
 
 	def test_too_short(self):
 		assert_that("123456789", not_(valid_pesel()))
+
+	def test_too_long(self):
+		assert_that("1234567890123", not_(valid_pesel()))
