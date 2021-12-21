@@ -1,5 +1,6 @@
 from modules.Person import Person
 from modules.Subject import Subject
+from modules.Grade import Grade
 
 
 class Student(Person):
@@ -16,6 +17,7 @@ class Student(Person):
 		if subjects is not None:
 			for subject in subjects:
 				self.assignSubject(subject)
+		self.__grades = set[Grade]()
 
 	def assignSubject(self, subject: Subject) -> Subject:
 		if not isinstance(subject, Subject):
@@ -32,3 +34,7 @@ class Student(Person):
 	@property
 	def subjects(self) -> frozenset[Subject]:
 		return frozenset(self.__subjects)
+
+	def addGrade(self, grade: Grade) -> Grade:
+		self.__grades.add(grade)
+		return grade
