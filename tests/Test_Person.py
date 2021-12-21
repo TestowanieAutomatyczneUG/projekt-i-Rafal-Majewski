@@ -33,3 +33,8 @@ class Test_edit_Person(unittest.TestCase):
 		person = Person(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		person.lastName = "Nowak"
 		self.assertEqual(person.lastName, "Nowak")
+
+	def test_change_pesel(self):
+		person = Person(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		person.pesel = "93101341329"
+		self.assertEqual(person.pesel, "93101341329")
