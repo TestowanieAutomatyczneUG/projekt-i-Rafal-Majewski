@@ -15,3 +15,6 @@ class TeacherView(PersonView):
 		if grade.subject not in self.__teacher.subjects:
 			raise ValueError("Subject is not assigned to teacher.")
 		return student.addGrade(grade)
+
+	def takeGrade(self, student: Student, grade: Grade) -> Grade:
+		return student.removeGrade(grade)

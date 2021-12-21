@@ -38,3 +38,7 @@ class Student(Person):
 	def addGrade(self, grade: Grade) -> Grade:
 		self.__grades.add(grade)
 		return grade
+
+	def removeGrade(self, grade: Grade) -> Grade:
+		self.__grades.remove(grade)
+		return grade
