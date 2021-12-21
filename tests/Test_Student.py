@@ -42,7 +42,7 @@ class Test_edit_Student(unittest.TestCase):
 		self.assertEqual(student.lastName, "Nowak")
 
 
-class Test_assign_subject_to_Student(unittest.TestCase):
+class Test_assignSubject(unittest.TestCase):
 	def test_correct_in_constructor(self):
 		subject = Subject(name="Matematyka")
 		student = Student(
@@ -70,7 +70,7 @@ class Test_assign_subject_to_Student(unittest.TestCase):
 		self.assertRaises(TypeError, student.assignSubject, subject)
 
 
-class Test_unassign_subject_from_Student(unittest.TestCase):
+class Test_unassignSubject(unittest.TestCase):
 	def test_if_removes_from_subjects(self):
 		subject = Subject(name="Matematyka")
 		student = Student(
