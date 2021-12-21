@@ -29,3 +29,6 @@ class Test_validatePesel(unittest.TestCase):
 	])
 	def test_incorrect_checksum(self, pesel: str):
 		assert_that(pesel, not_(valid_pesel()))
+
+	def test_too_short(self):
+		assert_that("123456789", not_(valid_pesel()))
