@@ -13,15 +13,10 @@ class Grade(Entry):
 		value: str,
 		datetime: Datetime
 	) -> None:
-		super().__init__(datetime=datetime)
+		super().__init__(datetime=datetime, teacher=teacher)
 		self.__subject = subject
-		self.__teacher = teacher
 		self.__value = value
 
 	@property
 	def subject(self) -> Subject:
 		return self.__subject
-
-	@property
-	def teacher(self) -> Teacher:
-		return self.__teacher

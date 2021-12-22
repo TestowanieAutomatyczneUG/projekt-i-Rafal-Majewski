@@ -1,10 +1,17 @@
 from modules.Entry import Entry
 from datetime import datetime as Datetime
+from modules.Teacher import Teacher
 
 
 class Comment(Entry):
-	def __init__(self, *, datetime: Datetime, content: str) -> None:
-		super().__init__(datetime=datetime)
+	def __init__(
+		self,
+		*,
+		datetime: Datetime,
+		content: str,
+		teacher: Teacher
+	) -> None:
+		super().__init__(datetime=datetime, teacher=teacher)
 		self.content = content
 
 	@property
