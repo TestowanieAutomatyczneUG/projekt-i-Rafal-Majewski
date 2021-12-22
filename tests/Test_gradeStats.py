@@ -23,3 +23,28 @@ class Test_totalAverage:
 			),
 		])
 		assert_that(totalAverage(grades)).is_close_to(2.0, tolerance=0.001)
+
+	def test_three(self):
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="86110298656")
+		subject = Subject(id="1", name="Matematyka")
+		grades = set[Grade]([
+			Grade(
+				teacher=teacher,
+				value=GradeValue.G2PLUS,
+				datetime=Datetime(year=2020, month=1, day=1),
+				subject=subject
+			),
+			Grade(
+				teacher=teacher,
+				value=GradeValue.G2,
+				datetime=Datetime(year=2020, month=1, day=1),
+				subject=subject
+			),
+			Grade(
+				teacher=teacher,
+				value=GradeValue.G5MINUS,
+				datetime=Datetime(year=2020, month=1, day=1),
+				subject=subject
+			),
+		])
+		assert_that(totalAverage(grades)).is_close_to(3.0, tolerance=0.001)
