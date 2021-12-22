@@ -51,5 +51,4 @@ class Test_validatePesel(unittest.TestCase):
 	def test_many_invalid_pesels(self):
 		pesels = load("./tests/data/invalid_pesels.txt")
 		for pesel in pesels:
-			print(pesel)
 			assert_that(validatePesel(pesel), is_(False))
