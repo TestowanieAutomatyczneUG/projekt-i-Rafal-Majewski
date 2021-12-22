@@ -60,6 +60,10 @@ class Gradebook:
 		del self.__students[student.pesel]
 		return student
 
+	def removeSubject(self, subject: Subject) -> Subject:
+		del self.__subjects[subject.id]
+		return subject
+
 	@property
 	def students(self) -> frozenset[Student]:
 		return frozenset(self.__students.values())

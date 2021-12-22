@@ -117,6 +117,23 @@ class Test_Gradebook_removeStudent(unittest.TestCase):
 		self.assertNotIn(student, gradebook.students)
 
 
+class Test_Gradebook_removeSubject(unittest.TestCase):
+	def test_return_value_when_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		subject = gradebook.addSubject(Subject(
+			id="a", name="Math"
+		))
+		self.assertEqual(gradebook.removeSubject(subject), subject)
+
+	def test_if_removes_when_correct(self):
+		gradebook = Gradebook(schoolName="Test")
+		subject = gradebook.addSubject(Subject(
+			id="a", name="Math"
+		))
+		gradebook.removeSubject(subject)
+		self.assertNotIn(subject, gradebook.subjects)
+
+
 class Test_Gradebook_students(unittest.TestCase):
 	def test_if_returns_frozenset(self):
 		gradebook = Gradebook(schoolName="Test")
