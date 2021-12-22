@@ -1,6 +1,7 @@
 import unittest
 from modules.GradeValue import GradeValue
 from parameterized import parameterized  # type: ignore
+from assertpy import assert_that  # type: ignore
 
 
 class Test_GradeValue(unittest.TestCase):
@@ -23,4 +24,8 @@ class Test_GradeValue(unittest.TestCase):
 		("G6", 6)
 	])
 	def test_GradeValue(self, gradeValueId: str, expectedGradeValueNumber: float):
-		self.assertEqual(GradeValue[gradeValueId].value, expectedGradeValueNumber)
+		assert_that(
+			GradeValue[gradeValueId].value
+		).is_equal_to(
+			expectedGradeValueNumber
+		)
