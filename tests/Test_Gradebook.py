@@ -6,7 +6,7 @@ from modules.Subject import Subject
 
 
 class Test_Gradebook_constructor(unittest.TestCase):
-	def test_Gradebook_constructor_with_teachers(self):
+	def test_with_teachers(self):
 		teachers = set([
 			Teacher(pesel="85052342517", firstName="Jan", lastName="Kowalski"),
 			Teacher(pesel="85052342517", firstName="Adam", lastName="Nowak"),
