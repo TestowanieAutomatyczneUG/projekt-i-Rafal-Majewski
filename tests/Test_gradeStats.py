@@ -5,9 +5,10 @@ from modules.Teacher import Teacher
 from datetime import datetime as Datetime
 from modules.Subject import Subject
 from modules.GradeValue import GradeValue
+import unittest
 
 
-class Test_totalAverage:
+class Test_totalAverage(unittest.TestCase):
 	def test_empty(self):
 		assert_that(calculateTotalAverage(set[Grade]())).is_none()
 
