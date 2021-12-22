@@ -4,6 +4,11 @@ from modules.Grade import Grade
 from modules.Teacher import Teacher
 
 
+def validateSubject(subject: Subject) -> None:
+	if not isinstance(subject, Subject):
+		raise TypeError("Subject must be a Subject object")
+
+
 class Student(Person):
 	def __init__(
 		self,
@@ -25,8 +30,7 @@ class Student(Person):
 				self.addGrade(grade)
 
 	def assignSubject(self, subject: Subject) -> Subject:
-		if not isinstance(subject, Subject):
-			raise TypeError("Subject must be an instance of Subject class.")
+		validateSubject(subject)
 		self.__subjects.add(subject)
 		return subject
 
@@ -35,8 +39,7 @@ class Student(Person):
 		return subject
 
 	def unassignSubject(self, subject: Subject) -> Subject:
-		if not isinstance(subject, Subject):
-			raise TypeError("Subject must be an instance of Subject class.")
+		validateSubject(subject)
 		return self._unassignSubject(subject)
 
 	@property
