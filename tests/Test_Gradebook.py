@@ -54,6 +54,13 @@ class Test_Gradebook_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Gradebook(schoolName="Test", teachers=53)
 
+	def test_with_teacher_of_wrong_type(self):
+		teachers = set([
+			"teacher1",
+		])
+		with self.assertRaises(TypeError):
+			Gradebook(schoolName="Test", teachers=teachers)
+
 
 class Test_Gradebook_addStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
