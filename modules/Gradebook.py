@@ -63,6 +63,8 @@ class Gradebook:
 		return teacher
 
 	def removeStudent(self, student: Student) -> Student:
+		if student.pesel not in self.__students:
+			raise ValueError("Student with this PESEL does not exist")
 		del self.__students[student.pesel]
 		return student
 
