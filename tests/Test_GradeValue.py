@@ -12,7 +12,7 @@ class Test_GradeValue(unittest.TestCase):
 	def test_name_syntax(self):
 		assert_that(self.gradeValue.name).matches(r"G[1-6](MINUS|PLUS)?")
 
-	def test_number(self):
+	def test_number_range(self):
 		assert_that(self.gradeValue.value).is_between(1, 6)
 
 
