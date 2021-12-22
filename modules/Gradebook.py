@@ -94,6 +94,8 @@ class Gradebook:
 
 	def removeTeacher(self, teacher: Teacher) -> Teacher:
 		validateTeacherType(teacher)
+		if teacher.pesel not in self.__teachers:
+			raise ValueError("Teacher with this PESEL does not exist")
 		del self.__teachers[teacher.pesel]
 		for student in self.__students.values():
 			student.removeReferencesToTeacher(teacher)

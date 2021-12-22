@@ -204,6 +204,13 @@ class Test_Gradebook_removeSubject(unittest.TestCase):
 
 
 class Test_Gradebook_removeTeacher(unittest.TestCase):
+	def test_nonexistent_teacher(self):
+		teacher1 = Teacher(firstName="Test", lastName="Test", pesel="85052342517")
+		teacher2 = Teacher(firstName="Test2", lastName="Test2", pesel="64022029588")
+		gradebook = Gradebook(schoolName="Test", teachers=[teacher1])
+		with self.assertRaises(ValueError):
+			gradebook.removeTeacher(teacher2)
+
 	def test_return_value_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
 		teacher = gradebook.addTeacher(Teacher(
