@@ -23,9 +23,9 @@ class Test_Gradebook_constructor(unittest.TestCase):
 
 	def test_with_subjects(self):
 		subjects = set([
-			Subject(name="Math"),
-			Subject(name="Physics"),
-			Subject(name="Chemistry"),
+			Subject(id="a", name="Math"),
+			Subject(id="b", name="Physics"),
+			Subject(id="c", name="Chemistry"),
 		])
 		gradebook = Gradebook(schoolName="Test", subjects=subjects)
 		self.assertEqual(gradebook.subjects, subjects)
@@ -102,6 +102,6 @@ class Test_Gradebook_subjects(unittest.TestCase):
 
 	def test_if_not_possible_to_add_subject_directly(self):
 		gradebook = Gradebook(schoolName="Test school")
-		subject = Subject(name="Test subject")
+		subject = Subject(id="test", name="Test subject")
 		with self.assertRaises(AttributeError):
 			gradebook.subjects.add(subject)
