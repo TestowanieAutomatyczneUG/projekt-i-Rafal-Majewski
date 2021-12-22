@@ -53,7 +53,7 @@ deps =
 	nose-cprof
 	assertpy
 commands =
-	nosetests --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
+	nosetests --nocapture --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
 
 [testenv:flake8]
 basepython = python3.9
