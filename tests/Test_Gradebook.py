@@ -93,6 +93,10 @@ class Test_Gradebook_addSubject(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			gradebook.addSubject(subject2)
 
+	def test_with_subject_of_wrong_type(self):
+		with self.assertRaises(TypeError):
+			Gradebook(schoolName="Test").addSubject(53)
+
 
 class Test_Gradebook_addTeacher(unittest.TestCase):
 	def test_correct(self):

@@ -45,6 +45,8 @@ class Gradebook:
 		return student
 
 	def addSubject(self, subject: Subject) -> Subject:
+		if not isinstance(subject, Subject):
+			raise TypeError("Subject must be an instance of Subject")
 		if subject.id in self.__subjects:
 			raise ValueError("Subject with this ID already exists")
 		self.__subjects[subject.id] = subject
