@@ -13,3 +13,7 @@ class Test_Subject_constructor(unittest.TestCase):
 	def test_incorrect_name(self):
 		with self.assertRaises(TypeError):
 			Subject(id="test", name=123)
+
+	def test_id(self):
+		subject = Subject(id="test", name="Math")
+		self.assertEqual(subject.id, "test")
