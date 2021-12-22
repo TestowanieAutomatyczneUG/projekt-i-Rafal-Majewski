@@ -20,3 +20,13 @@ class Test_Grade_constructor(unittest.TestCase):
 			value=GradeValue.G3PLUS,
 			datetime=datetime
 		)
+
+	def test_teacher_property(self):
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		grade = Grade(
+			subject=Subject(id="test", name="Math"),
+			teacher=teacher,
+			value=GradeValue.G3PLUS,
+			datetime=Datetime(year=2020, month=1, day=1)
+		)
+		self.assertEqual(grade.teacher, teacher)

@@ -1,6 +1,7 @@
 from modules.Person import Person
 from modules.Subject import Subject
 from modules.Grade import Grade
+from modules.Teacher import Teacher
 
 
 class Student(Person):
@@ -10,7 +11,8 @@ class Student(Person):
 		firstName: str,
 		lastName: str,
 		pesel: str,
-		subjects: set[Subject] = None
+		subjects: set[Subject] = None,
+		grades: set[Grade] = None,
 	) -> None:
 		super().__init__(firstName=firstName, lastName=lastName, pesel=pesel)
 		self.__subjects = set[Subject]()
@@ -18,6 +20,9 @@ class Student(Person):
 			for subject in subjects:
 				self.assignSubject(subject)
 		self.__grades = set[Grade]()
+		if grades is not None:
+			for grade in grades:
+				self.addGrade(grade)
 
 	def assignSubject(self, subject: Subject) -> Subject:
 		if not isinstance(subject, Subject):
@@ -46,3 +51,8 @@ class Student(Person):
 	@property
 	def grades(self) -> frozenset[Grade]:
 		return frozenset(self.__grades)
+
+	def removeReferencesToTeacher(self, teacher: Teacher) -> None:
+		self.__grades = set([
+			grade for grade in self.__grades if grade.teacher is not teacher
+		])

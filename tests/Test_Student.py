@@ -1,6 +1,10 @@
 import unittest
 from modules.Student import Student
 from modules.Subject import Subject
+from modules.Grade import Grade
+from modules.GradeValue import GradeValue
+from modules.Teacher import Teacher
+from datetime import datetime as Datetime
 
 
 class Test_Student_constructor(unittest.TestCase):
@@ -99,3 +103,31 @@ class Test_unassignSubject(unittest.TestCase):
 			subjects=set([subject])
 		)
 		self.assertIs(student.unassignSubject(subject), subject)
+
+
+class Test_Student_removeReferencesToTeacher(unittest.TestCase):
+	def test_with_teacher(self):
+		subject = Subject(id="test", name="Matematyka")
+		teacher1 = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		teacher2 = Teacher(firstName="Adam", lastName="Nowak", pesel="02231887245")
+		grade1 = Grade(
+			value=GradeValue.G1PLUS,
+			datetime=Datetime(2018, 1, 1),
+			teacher=teacher1,
+			subject=subject,
+		)
+		grade2 = Grade(
+			value=GradeValue.G1PLUS,
+			datetime=Datetime(2018, 1, 1),
+			teacher=teacher2,
+			subject=subject,
+		)
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			grades=[grade1, grade2],
+			subjects=[subject],
+		)
+		student.removeReferencesToTeacher(teacher1)
+		self.assertNotIn(grade1, student.grades)

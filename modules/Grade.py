@@ -21,3 +21,7 @@ class Grade(Entry):
 	@property
 	def subject(self) -> Subject:
 		return self.__subject
+
+	@property
+	def teacher(self) -> Teacher:
+		return self.__teacher

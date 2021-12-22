@@ -76,6 +76,8 @@ class Gradebook:
 
 	def removeTeacher(self, teacher: Teacher) -> Teacher:
 		del self.__teachers[teacher.pesel]
+		for student in self.__students.values():
+			student.removeReferencesToTeacher(teacher)
 		return teacher
 
 	@property

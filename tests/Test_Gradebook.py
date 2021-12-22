@@ -3,6 +3,9 @@ from modules.Gradebook import Gradebook
 from modules.Student import Student
 from modules.Teacher import Teacher
 from modules.Subject import Subject
+from modules.Grade import Grade
+from datetime import datetime as Datetime
+from modules.GradeValue import GradeValue
 
 
 class Test_Gradebook_constructor(unittest.TestCase):
@@ -201,6 +204,36 @@ class Test_Gradebook_removeTeacher(unittest.TestCase):
 		))
 		gradebook.removeTeacher(teacher)
 		self.assertNotIn(teacher, gradebook.teachers)
+
+	def test_with_students(self):
+		subject = Subject(id="a", name="Math")
+		teacher = Teacher(
+			firstName="Test",
+			lastName="Test",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		grade = Grade(
+			subject=subject,
+			teacher=teacher,
+			datetime=Datetime(year=2020, month=1, day=1),
+			value=GradeValue.G1PLUS
+		)
+		student = Student(
+			firstName="Test",
+			lastName="Test",
+			pesel="85052342517",
+			subjects=[subject],
+			grades=[grade]
+		)
+		gradebook = Gradebook(
+			schoolName="Test",
+			teachers=[teacher],
+			students=[student],
+			subjects=[subject]
+		)
+		gradebook.removeTeacher(teacher)
+		self.assertNotIn(grade, student.grades)
 
 
 class Test_Gradebook_students(unittest.TestCase):
