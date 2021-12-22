@@ -68,6 +68,8 @@ class Gradebook:
 
 	def removeSubject(self, subject: Subject) -> Subject:
 		del self.__subjects[subject.id]
+		for teacher in self.__teachers.values():
+			teacher.unassignSubject(subject)
 		return subject
 
 	def removeTeacher(self, teacher: Teacher) -> Teacher:

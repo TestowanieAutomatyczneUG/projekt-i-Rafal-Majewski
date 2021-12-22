@@ -153,6 +153,22 @@ class Test_Gradebook_removeSubject(unittest.TestCase):
 		gradebook.removeSubject(subject)
 		self.assertNotIn(subject, gradebook.subjects)
 
+	def test_if_removes_from_teachers(self):
+		subject = Subject(id="a", name="Math")
+		teacher = Teacher(
+			firstName="Test",
+			lastName="Test",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		gradebook = Gradebook(
+			schoolName="Test",
+			teachers=[teacher],
+			subjects=[subject]
+		)
+		gradebook.removeSubject(subject)
+		self.assertNotIn(subject, teacher.subjects)
+
 
 class Test_Gradebook_removeTeacher(unittest.TestCase):
 	def test_return_value_when_correct(self):
