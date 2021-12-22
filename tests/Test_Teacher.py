@@ -10,8 +10,8 @@ class Test_Teacher_constructor(unittest.TestCase):
 
 	def test_with_subjects(self):
 		subjects = set([
-			Subject(name="Math"),
-			Subject(name="Physics"),
+			Subject(id="test", name="Math"),
+			Subject(id="test2", name="Physics"),
 		])
 		teacher = Teacher(
 			firstName="Jan",
@@ -24,7 +24,7 @@ class Test_Teacher_constructor(unittest.TestCase):
 
 class Test_unassignSubject(unittest.TestCase):
 	def test_if_removes_from_subjects(self):
-		subject = Subject(name="Matematyka")
+		subject = Subject(id="test", name="Matematyka")
 		teacher = Teacher(
 			firstName="Jan",
 			lastName="Kowalski",

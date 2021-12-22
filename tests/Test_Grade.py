@@ -11,7 +11,7 @@ class Test_Grade_constructor(unittest.TestCase):
 		self.assertRaises(TypeError, Grade)
 
 	def test_correct(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		datetime = Datetime(year=2020, month=1, day=1)
 		Grade(

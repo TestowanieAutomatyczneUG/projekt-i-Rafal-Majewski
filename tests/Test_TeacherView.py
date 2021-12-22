@@ -13,13 +13,17 @@ class Test_TeacherView_constructor(unittest.TestCase):
 		self.assertRaises(TypeError, TeacherView)
 
 	def test_correct(self):
-		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517"
+		)
 		TeacherView(teacher=teacher)
 
 
 class Test_TeacherView_giveGrade(unittest.TestCase):
 	def test_return_value(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -43,7 +47,7 @@ class Test_TeacherView_giveGrade(unittest.TestCase):
 		self.assertIs(teacherView.giveGrade(student, grade), grade)
 
 	def test_wrong_subject(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -68,7 +72,7 @@ class Test_TeacherView_giveGrade(unittest.TestCase):
 			teacherView.giveGrade(student, grade)
 
 	def test_wrong_teacher(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -93,7 +97,7 @@ class Test_TeacherView_giveGrade(unittest.TestCase):
 			teacherView.giveGrade(student, grade)
 
 	def test_if_adds(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -120,7 +124,7 @@ class Test_TeacherView_giveGrade(unittest.TestCase):
 
 class Test_takeGrade(unittest.TestCase):
 	def test_return_value(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -145,7 +149,7 @@ class Test_takeGrade(unittest.TestCase):
 		self.assertIs(teacherView.takeGrade(student, grade), grade)
 
 	def test_if_removes(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -171,7 +175,7 @@ class Test_takeGrade(unittest.TestCase):
 		self.assertNotIn(grade, student.grades)
 
 	def test_wrong_subject(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -198,7 +202,7 @@ class Test_takeGrade(unittest.TestCase):
 			teacherView.takeGrade(student, grade)
 
 	def test_wrong_teacher(self):
-		subject = Subject(name="Math")
+		subject = Subject(id="test", name="Math")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",

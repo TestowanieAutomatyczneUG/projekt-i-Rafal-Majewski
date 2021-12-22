@@ -18,8 +18,8 @@ class Test_Student_constructor(unittest.TestCase):
 
 	def test_with_subjects(self):
 		subjects = set([
-			Subject(name="Math"),
-			Subject(name="Physics"),
+			Subject(id="test", name="Math"),
+			Subject(id="test2", name="Physics"),
 		])
 		student = Student(
 			firstName="Jan",
@@ -44,7 +44,7 @@ class Test_edit_Student(unittest.TestCase):
 
 class Test_assignSubject(unittest.TestCase):
 	def test_correct_in_constructor(self):
-		subject = Subject(name="Matematyka")
+		subject = Subject(id="test", name="Matematyka")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -54,12 +54,12 @@ class Test_assignSubject(unittest.TestCase):
 		self.assertIn(subject, student.subjects)
 
 	def test_return_value(self):
-		subject = Subject(name="Matematyka")
+		subject = Subject(id="test", name="Matematyka")
 		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		self.assertIs(student.assignSubject(subject), subject)
 
 	def test_correct_manually(self):
-		subject = Subject(name="Matematyka")
+		subject = Subject(id="test", name="Matematyka")
 		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		student.assignSubject(subject)
 		self.assertIn(subject, student.subjects)
@@ -72,7 +72,7 @@ class Test_assignSubject(unittest.TestCase):
 
 class Test_unassignSubject(unittest.TestCase):
 	def test_if_removes_from_subjects(self):
-		subject = Subject(name="Matematyka")
+		subject = Subject(id="test", name="Matematyka")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
@@ -91,7 +91,7 @@ class Test_unassignSubject(unittest.TestCase):
 			student.unassignSubject("informatyka")
 
 	def test_return_value(self):
-		subject = Subject(name="Matematyka")
+		subject = Subject(id="test", name="Matematyka")
 		student = Student(
 			firstName="Jan",
 			lastName="Kowalski",
