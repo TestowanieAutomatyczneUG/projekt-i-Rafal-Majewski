@@ -1,4 +1,4 @@
-from modules.gradeStats import calculateTotalAverage
+from modules.gradeStats import calculateTotalAverage, calculateAverageBySubject
 from assertpy import assert_that  # type: ignore
 from modules.Grade import Grade
 from modules.Teacher import Teacher
@@ -49,3 +49,8 @@ class Test_totalAverage(unittest.TestCase):
 			),
 		])
 		assert_that(calculateTotalAverage(grades)).is_close_to(3.0, tolerance=0.001)
+
+
+class Test_calculateAverageBySubject(unittest.TestCase):
+	def test_empty(self):
+		assert_that(calculateAverageBySubject(set[Grade]())).is_equal_to({})
