@@ -33,5 +33,7 @@ class Teacher(Person):
 
 	def unassignSubject(self, subject: Subject) -> Subject:
 		validateSubject(subject)
+		if subject not in self.__subjects:
+			raise ValueError("Subject is not assigned to this teacher")
 		self.__subjects.remove(subject)
 		return subject

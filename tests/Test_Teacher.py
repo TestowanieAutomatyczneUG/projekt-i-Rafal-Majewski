@@ -34,6 +34,18 @@ class Test_unassignSubject(unittest.TestCase):
 		teacher.unassignSubject(subject)
 		self.assertNotIn(subject, teacher.subjects)
 
+	def test_nonexistent(self):
+		subject1 = Subject(id="test", name="Matematyka")
+		subject2 = Subject(id="test2", name="Fizyka")
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject1]
+		)
+		with self.assertRaises(ValueError):
+			teacher.unassignSubject(subject2)
+
 
 class Test_assignSubject(unittest.TestCase):
 	def test_wrong_type(self):
