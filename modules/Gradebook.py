@@ -39,6 +39,8 @@ class Gradebook:
 		self.__schoolName = schoolName
 
 	def addStudent(self, student: Student) -> Student:
+		if not isinstance(student, Student):
+			raise TypeError("Student must be an instance of Student")
 		if student.pesel in self.__students:
 			raise ValueError("Student with this PESEL already exists")
 		self.__students[student.pesel] = student

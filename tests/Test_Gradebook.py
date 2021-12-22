@@ -83,6 +83,11 @@ class Test_Gradebook_addStudent(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			gradebook.addStudent(student2)
 
+	def test_with_student_of_wrong_type(self):
+		gradebook = Gradebook(schoolName="Test")
+		with self.assertRaises(TypeError):
+			gradebook.addStudent(53)
+
 
 class Test_Gradebook_addSubject(unittest.TestCase):
 	def test_if_raises_when_id_already_exists(self):
