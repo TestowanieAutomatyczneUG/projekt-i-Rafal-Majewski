@@ -3,6 +3,18 @@ from modules.Teacher import Teacher
 from modules.Subject import Subject
 
 
+def validateStudentType(student: Student) -> None:
+	if not isinstance(student, Student):
+		raise TypeError("Student must be an instance of Student class.")
+
+def validateTeacherType(teacher: Teacher) -> None:
+	if not isinstance(teacher, Teacher):
+		raise TypeError("Teacher must be an instance of Teacher class.")
+
+def validateSubjectType(subject: Subject) -> None:
+	if not isinstance(subject, Subject):
+		raise TypeError("Subject must be an instance of Subject class.")
+
 class Gradebook:
 	def __init__(
 		self,
@@ -39,36 +51,35 @@ class Gradebook:
 		self.__schoolName = schoolName
 
 	def addStudent(self, student: Student) -> Student:
-		if not isinstance(student, Student):
-			raise TypeError("Student must be an instance of Student")
+		validateStudentType(student)
 		if student.pesel in self.__students:
 			raise ValueError("Student with this PESEL already exists")
 		self.__students[student.pesel] = student
 		return student
 
 	def addSubject(self, subject: Subject) -> Subject:
-		if not isinstance(subject, Subject):
-			raise TypeError("Subject must be an instance of Subject")
+		validateSubjectType(subject)
 		if subject.id in self.__subjects:
 			raise ValueError("Subject with this ID already exists")
 		self.__subjects[subject.id] = subject
 		return subject
 
 	def addTeacher(self, teacher: Teacher) -> Teacher:
-		if not isinstance(teacher, Teacher):
-			raise TypeError("Teacher must be an instance of Teacher")
+		validateTeacherType(teacher)
 		if teacher.pesel in self.__teachers:
 			raise ValueError("Teacher with this PESEL already exists")
 		self.__teachers[teacher.pesel] = teacher
 		return teacher
 
 	def removeStudent(self, student: Student) -> Student:
+		validateStudentType(student)
 		if student.pesel not in self.__students:
 			raise ValueError("Student with this PESEL does not exist")
 		del self.__students[student.pesel]
 		return student
 
 	def removeSubject(self, subject: Subject) -> Subject:
+		validateSubjectType(subject)
 		del self.__subjects[subject.id]
 		for teacher in self.__teachers.values():
 			teacher.unassignSubject(subject)
@@ -77,6 +88,7 @@ class Gradebook:
 		return subject
 
 	def removeTeacher(self, teacher: Teacher) -> Teacher:
+		validateTeacherType(teacher)
 		del self.__teachers[teacher.pesel]
 		for student in self.__students.values():
 			student.removeReferencesToTeacher(teacher)
