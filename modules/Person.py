@@ -14,6 +14,8 @@ class Person(ABC):
 
 	@firstName.setter
 	def firstName(self, firstName: str) -> None:
+		if not isinstance(firstName, str):
+			raise TypeError("First name must be a string")
 		self.__firstName = firstName
 
 	@property
