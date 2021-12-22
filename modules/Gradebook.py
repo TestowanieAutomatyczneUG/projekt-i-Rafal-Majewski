@@ -51,6 +51,8 @@ class Gradebook:
 		return subject
 
 	def addTeacher(self, teacher: Teacher) -> Teacher:
+		if teacher.pesel in self.__teachers:
+			raise ValueError("Teacher with this PESEL already exists")
 		self.__teachers[teacher.pesel] = teacher
 		return teacher
 

@@ -91,6 +91,14 @@ class Test_Gradebook_addTeacher(unittest.TestCase):
 		))
 		self.assertIsInstance(teacher, Teacher)
 
+	def test_if_raises_when_pesel_already_exists(self):
+		gradebook = Gradebook(schoolName="Test")
+		teacher1 = Teacher(firstName="Test1", lastName="Test1", pesel="85052342517")
+		teacher2 = Teacher(firstName="Test2", lastName="Test2", pesel="85052342517")
+		gradebook.addTeacher(teacher1)
+		with self.assertRaises(ValueError):
+			gradebook.addTeacher(teacher2)
+
 
 class Test_Gradebook_removeStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
