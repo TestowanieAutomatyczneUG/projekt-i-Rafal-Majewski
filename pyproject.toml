@@ -51,6 +51,7 @@ deps =
 	parameterized
 	PyHamcrest
 	nose-cprof
+	assertpy
 commands =
 	nosetests --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
 
