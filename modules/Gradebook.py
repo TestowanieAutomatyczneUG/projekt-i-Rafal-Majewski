@@ -12,9 +12,9 @@ class Gradebook:
 		students: set[Student] = None,
 		teachers: set[Teacher] = None,
 	) -> None:
-		self.__subjects = set[Subject]()
-		self.__students = set[Student]()
-		self.__teachers = set[Teacher]()
+		self.__subjects = dict[str, Subject]()
+		self.__students = dict[str, Student]()
+		self.__teachers = dict[str, Teacher]()
 		if subjects is not None:
 			for subject in subjects:
 				self.addSubject(subject)
@@ -39,29 +39,29 @@ class Gradebook:
 		self.__schoolName = schoolName
 
 	def addStudent(self, student: Student) -> Student:
-		self.__students.add(student)
+		self.__students[student.pesel] = student
 		return student
 
 	def addSubject(self, subject: Subject) -> Subject:
-		self.__subjects.add(subject)
+		self.__subjects[subject.id] = subject
 		return subject
 
 	def addTeacher(self, teacher: Teacher) -> Teacher:
-		self.__teachers.add(teacher)
+		self.__teachers[teacher.pesel] = teacher
 		return teacher
 
 	def removeStudent(self, student: Student) -> Student:
-		self.__students.remove(student)
+		del self.__students[student.pesel]
 		return student
 
 	@property
 	def students(self) -> frozenset[Student]:
-		return frozenset(self.__students)
+		return frozenset(self.__students.values())
 
 	@property
 	def subjects(self) -> frozenset[Subject]:
-		return frozenset(self.__subjects)
+		return frozenset(self.__subjects.values())
 
 	@property
 	def teachers(self) -> frozenset[Teacher]:
-		return frozenset(self.__teachers)
+		return frozenset(self.__teachers.values())
