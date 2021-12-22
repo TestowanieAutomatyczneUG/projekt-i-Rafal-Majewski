@@ -1,10 +1,18 @@
 import unittest
 from modules.GradeValue import GradeValue
-from parameterized import parameterized  # type: ignore
+from parameterized import parameterized, parameterized_class  # type: ignore
 from assertpy import assert_that  # type: ignore
 
 
+@parameterized_class(
+	("gradeValue"),
+	[(gradeValue,) for gradeValue in GradeValue]
+)
 class Test_GradeValue(unittest.TestCase):
+	pass
+
+
+class Test_GradeValue_if_correct_values(unittest.TestCase):
 	@parameterized.expand([
 		("G1", 1),
 		("G1PLUS", 1.25),
