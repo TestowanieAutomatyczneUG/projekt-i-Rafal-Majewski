@@ -73,6 +73,16 @@ class Test_Gradebook_addStudent(unittest.TestCase):
 			gradebook.addStudent(student2)
 
 
+class Test_Gradebook_addSubject(unittest.TestCase):
+	def test_if_raises_when_id_already_exists(self):
+		gradebook = Gradebook(schoolName="Test")
+		subject1 = Subject(id="a", name="Math")
+		subject2 = Subject(id="a", name="Math2")
+		gradebook.addSubject(subject1)
+		with self.assertRaises(ValueError):
+			gradebook.addSubject(subject2)
+
+
 class Test_Gradebook_addTeacher(unittest.TestCase):
 	def test_correct(self):
 		gradebook = Gradebook(schoolName="Test")
