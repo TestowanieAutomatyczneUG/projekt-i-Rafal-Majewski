@@ -34,6 +34,10 @@ class Test_Person_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Person(firstName="Jan", lastName=53, pesel="85052342517")
 
+	def test_empty_lastName(self):
+		with self.assertRaises(ValueError):
+			Person(firstName="Jan", lastName="", pesel="85052342517")
+
 
 class Test_edit_Person(unittest.TestCase):
 	def test_change_firstName(self):
