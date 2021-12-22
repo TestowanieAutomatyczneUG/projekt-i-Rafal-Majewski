@@ -30,11 +30,14 @@ class Student(Person):
 		self.__subjects.add(subject)
 		return subject
 
+	def _unassignSubject(self, subject: Subject) -> Subject:
+		self.__subjects.remove(subject)
+		return subject
+
 	def unassignSubject(self, subject: Subject) -> Subject:
 		if not isinstance(subject, Subject):
 			raise TypeError("Subject must be an instance of Subject class.")
-		self.__subjects.remove(subject)
-		return subject
+		return self._unassignSubject(subject)
 
 	@property
 	def subjects(self) -> frozenset[Subject]:
@@ -57,7 +60,8 @@ class Student(Person):
 			grade for grade in self.__grades if grade.teacher is not teacher
 		])
 
-	def removeReferencesToSubject(self, subject: Subject) -> None:
+	def removeReferencesToSubject(self, subject: Subject) -> Subject:
 		self.__grades = set([
 			grade for grade in self.__grades if grade.subject is not subject
 		])
+		return self._unassignSubject(subject)
