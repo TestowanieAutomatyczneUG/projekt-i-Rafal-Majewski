@@ -15,6 +15,20 @@ class Test_GradeValue(unittest.TestCase):
 	def test_number_range(self):
 		assert_that(self.gradeValue.value).is_between(1, 6)
 
+	def test_number(self):
+		assert_that(
+			int(self.gradeValue.name[1]) + (
+				0.25
+				if self.gradeValue.name.endswith("PLUS")
+				else (
+					-0.25
+					if self.gradeValue.name.endswith("MINUS")
+					else
+					0
+				)
+			)
+		).is_equal_to(self.gradeValue.value)
+
 
 class Test_GradeValue_if_correct_values(unittest.TestCase):
 	@parameterized.expand([
