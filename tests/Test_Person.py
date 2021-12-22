@@ -30,6 +30,10 @@ class Test_Person_constructor(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			Person(firstName="", lastName="Kowalski", pesel="85052342517")
 
+	def test_lastName_of_wrong_type(self):
+		with self.assertRaises(TypeError):
+			Person(firstName="Jan", lastName=53, pesel="85052342517")
+
 
 class Test_edit_Person(unittest.TestCase):
 	def test_change_firstName(self):
