@@ -9,7 +9,7 @@ class Test_Gradebook_constructor(unittest.TestCase):
 	def test_with_teachers(self):
 		teachers = set([
 			Teacher(pesel="85052342517", firstName="Jan", lastName="Kowalski"),
-			Teacher(pesel="85052342517", firstName="Adam", lastName="Nowak"),
+			Teacher(pesel="52010961958", firstName="Adam", lastName="Nowak"),
 		])
 		gradebook = Gradebook(teachers=teachers, schoolName="Test")
 		self.assertEqual(gradebook.teachers, teachers)
