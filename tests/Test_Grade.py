@@ -30,3 +30,12 @@ class Test_Grade_constructor(unittest.TestCase):
 			datetime=Datetime(year=2020, month=1, day=1)
 		)
 		self.assertEqual(grade.teacher, teacher)
+
+	def test_incorrect_subject_type(self):
+		with self.assertRaises(TypeError):
+			Grade(
+				subject=1,
+				teacher=Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517"),
+				value=GradeValue.G3PLUS,
+				datetime=Datetime(year=2020, month=1, day=1)
+			)

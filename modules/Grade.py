@@ -14,9 +14,15 @@ class Grade(Entry):
 		datetime: Datetime
 	) -> None:
 		super().__init__(datetime=datetime, teacher=teacher)
-		self.__subject = subject
+		self.subject = subject
 		self.__value = value
 
 	@property
 	def subject(self) -> Subject:
 		return self.__subject
+
+	@subject.setter
+	def subject(self, subject: Subject) -> None:
+		if not isinstance(subject, Subject):
+			raise TypeError("Subject must be an instance of Subject class.")
+		self.__subject = subject
