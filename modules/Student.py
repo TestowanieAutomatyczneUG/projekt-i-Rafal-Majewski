@@ -45,6 +45,8 @@ class Student(Person):
 		return subject
 
 	def _unassignSubject(self, subject: Subject) -> Subject:
+		if subject not in self.__subjects:
+			raise ValueError("Subject is not assigned to this student")
 		self.__subjects.remove(subject)
 		return subject
 

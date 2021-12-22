@@ -104,6 +104,18 @@ class Test_unassignSubject(unittest.TestCase):
 		)
 		self.assertIs(student.unassignSubject(subject), subject)
 
+	def test_nonexistent(self):
+		subject1 = Subject(id="test", name="Matematyka")
+		subject2 = Subject(id="test2", name="Fizyka")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=set([subject1])
+		)
+		with self.assertRaises(ValueError):
+			student.unassignSubject(subject2)
+
 
 class Test_Student_removeReferencesToTeacher(unittest.TestCase):
 	def test_with_teacher_if_removes(self):
