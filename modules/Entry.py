@@ -6,7 +6,7 @@ from modules.Teacher import Teacher
 class Entry(ABC):
 	def __init__(self, *, datetime: Datetime, teacher: Teacher) -> None:
 		self.datetime = datetime
-		self.__teacher = teacher
+		self.teacher = teacher
 
 	@property
 	def datetime(self) -> Datetime:
@@ -21,3 +21,9 @@ class Entry(ABC):
 	@property
 	def teacher(self) -> Teacher:
 		return self.__teacher
+
+	@teacher.setter
+	def teacher(self, teacher: Teacher) -> None:
+		if not isinstance(teacher, Teacher):
+			raise TypeError("Teacher must be an instance of Teacher class.")
+		self.__teacher = teacher

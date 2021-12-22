@@ -56,3 +56,12 @@ class Test_Entry_constructor(unittest.TestCase):
 		)
 		with self.assertRaises(TypeError):
 			entry.datetime = "Jan 01 2020"
+
+	def test_incorrect_teacher_type(self):
+		datetime = Datetime(year=2020, month=1, day=1)
+		teacher = 1
+		with self.assertRaises(TypeError):
+			Entry(
+				datetime=datetime,
+				teacher=teacher,
+			)
