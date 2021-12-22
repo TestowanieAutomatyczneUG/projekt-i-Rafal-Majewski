@@ -148,6 +148,13 @@ class Test_Gradebook_removeStudent(unittest.TestCase):
 
 
 class Test_Gradebook_removeSubject(unittest.TestCase):
+	def test_nonexistent_subject(self):
+		subject1 = Subject(id="a", name="Math")
+		subject2 = Subject(id="b", name="Physics")
+		gradebook = Gradebook(schoolName="Test", subjects=[subject1])
+		with self.assertRaises(ValueError):
+			gradebook.removeSubject(subject2)
+
 	def test_return_value_when_correct(self):
 		gradebook = Gradebook(schoolName="Test")
 		subject = gradebook.addSubject(Subject(

@@ -7,13 +7,16 @@ def validateStudentType(student: Student) -> None:
 	if not isinstance(student, Student):
 		raise TypeError("Student must be an instance of Student class.")
 
+
 def validateTeacherType(teacher: Teacher) -> None:
 	if not isinstance(teacher, Teacher):
 		raise TypeError("Teacher must be an instance of Teacher class.")
 
+
 def validateSubjectType(subject: Subject) -> None:
 	if not isinstance(subject, Subject):
 		raise TypeError("Subject must be an instance of Subject class.")
+
 
 class Gradebook:
 	def __init__(
@@ -80,6 +83,8 @@ class Gradebook:
 
 	def removeSubject(self, subject: Subject) -> Subject:
 		validateSubjectType(subject)
+		if subject.id not in self.__subjects:
+			raise ValueError("Subject with this ID does not exist")
 		del self.__subjects[subject.id]
 		for teacher in self.__teachers.values():
 			teacher.unassignSubject(subject)
