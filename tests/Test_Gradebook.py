@@ -14,6 +14,14 @@ class Test_Gradebook_constructor(unittest.TestCase):
 		gradebook = Gradebook(teachers=teachers, schoolName="Test")
 		self.assertEqual(gradebook.teachers, teachers)
 
+	def test_with_students(self):
+		students = set([
+			Student(pesel="85052342517", firstName="Jan", lastName="Kowalski"),
+			Student(pesel="52010961958", firstName="Adam", lastName="Nowak"),
+		])
+		gradebook = Gradebook(schoolName="Test", students=students)
+		self.assertEqual(gradebook.students, students)
+
 	def test_no_arguments(self):
 		self.assertRaises(TypeError, Gradebook)
 
