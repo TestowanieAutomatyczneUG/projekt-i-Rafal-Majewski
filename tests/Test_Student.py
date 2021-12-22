@@ -151,3 +151,10 @@ class Test_removeReferencesToSubject(unittest.TestCase):
 		)
 		student.removeReferencesToSubject(subject)
 		self.assertNotIn(grade, student.grades)
+
+
+class Test_addGrade(unittest.TestCase):
+	def test_wrong_type(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		with self.assertRaises(TypeError):
+			student.addGrade("grade")

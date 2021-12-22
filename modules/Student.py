@@ -9,6 +9,11 @@ def validateSubject(subject: Subject) -> None:
 		raise TypeError("Subject must be a Subject object")
 
 
+def validateGrade(grade: Grade) -> None:
+	if not isinstance(grade, Grade):
+		raise TypeError("Grade must be a Grade object")
+
+
 class Student(Person):
 	def __init__(
 		self,
@@ -47,10 +52,12 @@ class Student(Person):
 		return frozenset(self.__subjects)
 
 	def addGrade(self, grade: Grade) -> Grade:
+		validateGrade(grade)
 		self.__grades.add(grade)
 		return grade
 
 	def removeGrade(self, grade: Grade) -> Grade:
+		validateGrade(grade)
 		self.__grades.remove(grade)
 		return grade
 
