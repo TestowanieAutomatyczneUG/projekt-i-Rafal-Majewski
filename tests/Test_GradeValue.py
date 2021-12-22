@@ -9,7 +9,8 @@ from assertpy import assert_that  # type: ignore
 	[(gradeValue,) for gradeValue in GradeValue]
 )
 class Test_GradeValue(unittest.TestCase):
-	pass
+	def test_name_syntax(self):
+		assert_that(self.gradeValue.name).matches(r"G[1-6](MINUS|PLUS)?")
 
 
 class Test_GradeValue_if_correct_values(unittest.TestCase):
