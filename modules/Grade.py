@@ -2,6 +2,7 @@ from modules.Entry import Entry
 from modules.Teacher import Teacher
 from modules.Subject import Subject
 from datetime import datetime as Datetime
+from modules.GradeValue import GradeValue
 
 
 class Grade(Entry):
@@ -10,12 +11,12 @@ class Grade(Entry):
 		*,
 		subject: Subject,
 		teacher: Teacher,
-		value: str,
-		datetime: Datetime
+		value: GradeValue,
+		datetime: Datetime,
 	) -> None:
 		super().__init__(datetime=datetime, teacher=teacher)
 		self.subject = subject
-		self.__value = value
+		self.value = value
 
 	@property
 	def subject(self) -> Subject:
@@ -26,3 +27,13 @@ class Grade(Entry):
 		if not isinstance(subject, Subject):
 			raise TypeError("Subject must be an instance of Subject class.")
 		self.__subject = subject
+
+	@property
+	def value(self) -> GradeValue:
+		return self.__value
+
+	@value.setter
+	def value(self, value: GradeValue) -> None:
+		if not isinstance(value, GradeValue):
+			raise TypeError("Value must be an instance of GradeValue class.")
+		self.__value = value

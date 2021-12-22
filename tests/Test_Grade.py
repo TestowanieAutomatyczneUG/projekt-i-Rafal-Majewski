@@ -39,3 +39,21 @@ class Test_Grade_constructor(unittest.TestCase):
 				value=GradeValue.G3PLUS,
 				datetime=Datetime(year=2020, month=1, day=1)
 			)
+
+	def test_incorrect_value_type(self):
+		with self.assertRaises(TypeError):
+			Grade(
+				subject=Subject(id="test", name="Math"),
+				teacher=Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517"),
+				value=1,
+				datetime=Datetime(year=2020, month=1, day=1)
+			)
+
+	def test_value_property(self):
+		grade = Grade(
+			subject=Subject(id="test", name="Math"),
+			teacher=Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517"),
+			value=GradeValue.G3PLUS,
+			datetime=Datetime(year=2020, month=1, day=1)
+		)
+		self.assertEqual(grade.value, GradeValue.G3PLUS)
