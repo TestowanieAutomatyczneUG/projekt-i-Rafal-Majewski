@@ -4,14 +4,27 @@ from modules.Subject import Subject
 
 
 class Gradebook:
-	def __init__(self, *, schoolName: str, subjects: set[Subject] = None) -> None:
+	def __init__(
+		self,
+		*,
+		schoolName: str,
+		subjects: set[Subject] = None,
+		students: set[Student] = None,
+		teachers: set[Teacher] = None,
+	) -> None:
 		self.__subjects = set[Subject]()
+		self.__students = set[Student]()
+		self.__teachers = set[Teacher]()
 		if subjects is not None:
 			for subject in subjects:
 				self.addSubject(subject)
+		if teachers is not None:
+			for teacher in teachers:
+				self.addTeacher(teacher)
+		if students is not None:
+			for student in students:
+				self.addStudent(student)
 		self.schoolName = schoolName
-		self.__students = set[Student]()
-		self.__teachers = set[Teacher]()
 
 	@property
 	def schoolName(self) -> str:
