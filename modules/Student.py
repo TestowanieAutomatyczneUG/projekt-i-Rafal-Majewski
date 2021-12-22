@@ -56,3 +56,8 @@ class Student(Person):
 		self.__grades = set([
 			grade for grade in self.__grades if grade.teacher is not teacher
 		])
+
+	def removeReferencesToSubject(self, subject: Subject) -> None:
+		self.__grades = set([
+			grade for grade in self.__grades if grade.subject is not subject
+		])

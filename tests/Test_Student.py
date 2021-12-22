@@ -131,3 +131,23 @@ class Test_Student_removeReferencesToTeacher(unittest.TestCase):
 		)
 		student.removeReferencesToTeacher(teacher1)
 		self.assertNotIn(grade1, student.grades)
+
+
+class Test_removeReferencesToSubject(unittest.TestCase):
+	def test_grades(self):
+		subject = Subject(id="test", name="Matematyka")
+		grade = Grade(
+			value=GradeValue.G1PLUS,
+			datetime=Datetime(2018, 1, 1),
+			subject=subject,
+			teacher=Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		)
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject],
+			grades=[grade],
+		)
+		student.removeReferencesToSubject(subject)
+		self.assertNotIn(grade, student.grades)

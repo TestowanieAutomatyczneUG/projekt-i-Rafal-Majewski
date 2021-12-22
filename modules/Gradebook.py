@@ -72,6 +72,7 @@ class Gradebook:
 			teacher.unassignSubject(subject)
 		for student in self.__students.values():
 			student.unassignSubject(subject)
+			student.removeReferencesToSubject(subject)
 		return subject
 
 	def removeTeacher(self, teacher: Teacher) -> Teacher:
