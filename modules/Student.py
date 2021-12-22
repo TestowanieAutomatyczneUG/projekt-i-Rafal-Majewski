@@ -77,6 +77,7 @@ class Student(Person):
 		])
 
 	def removeReferencesToSubject(self, subject: Subject) -> Subject:
+		validateSubject(subject)
 		self.__grades = set([
 			grade for grade in self.__grades if grade.subject is not subject
 		])
