@@ -50,6 +50,10 @@ class Test_Gradebook_constructor(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Gradebook(schoolName="Test", subjects=53)
 
+	def test_with_teachers_of_wrong_type(self):
+		with self.assertRaises(TypeError):
+			Gradebook(schoolName="Test", teachers=53)
+
 
 class Test_Gradebook_addStudent(unittest.TestCase):
 	def test_return_value_when_correct(self):
