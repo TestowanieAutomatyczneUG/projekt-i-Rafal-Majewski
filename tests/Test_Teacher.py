@@ -33,3 +33,14 @@ class Test_unassignSubject(unittest.TestCase):
 		)
 		teacher.unassignSubject(subject)
 		self.assertNotIn(subject, teacher.subjects)
+
+
+class Test_assignSubject(unittest.TestCase):
+	def test_wrong_type(self):
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		with self.assertRaises(TypeError):
+			teacher.assignSubject("test")
