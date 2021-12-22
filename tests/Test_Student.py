@@ -106,7 +106,7 @@ class Test_unassignSubject(unittest.TestCase):
 
 
 class Test_Student_removeReferencesToTeacher(unittest.TestCase):
-	def test_with_teacher(self):
+	def test_with_teacher_if_removes(self):
 		subject = Subject(id="test", name="Matematyka")
 		teacher1 = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		teacher2 = Teacher(firstName="Adam", lastName="Nowak", pesel="02231887245")
@@ -131,6 +131,15 @@ class Test_Student_removeReferencesToTeacher(unittest.TestCase):
 		)
 		student.removeReferencesToTeacher(teacher1)
 		self.assertNotIn(grade1, student.grades)
+
+	def test_with_teacher_wrong_type(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517"
+		)
+		with self.assertRaises(TypeError):
+			student.removeReferencesToTeacher("Jan")
 
 
 class Test_removeReferencesToSubject(unittest.TestCase):

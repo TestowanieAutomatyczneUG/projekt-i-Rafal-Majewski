@@ -14,6 +14,11 @@ def validateGrade(grade: Grade) -> None:
 		raise TypeError("Grade must be a Grade object")
 
 
+def validateTeacher(teacher: Teacher) -> None:
+	if not isinstance(teacher, Teacher):
+		raise TypeError("Teacher must be a Teacher object")
+
+
 class Student(Person):
 	def __init__(
 		self,
@@ -66,6 +71,7 @@ class Student(Person):
 		return frozenset(self.__grades)
 
 	def removeReferencesToTeacher(self, teacher: Teacher) -> None:
+		validateTeacher(teacher)
 		self.__grades = set([
 			grade for grade in self.__grades if grade.teacher is not teacher
 		])
