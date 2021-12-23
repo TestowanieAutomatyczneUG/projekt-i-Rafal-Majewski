@@ -13,7 +13,12 @@ from modules.Teacher import Teacher
 from modules.GradeValue import GradeValue
 from modules.Grade import Grade
 from datetime import datetime as Datetime
-from hamcrest import assert_that, equal_to, has_length, instance_of
+from hamcrest import \
+	assert_that, \
+	equal_to, \
+	has_length, \
+	instance_of, \
+	matches_regexp
 
 
 @parameterized_class(
@@ -80,6 +85,12 @@ class Test_deserializeStudent(unittest.TestCase):
 		assert_that(
 			deserializeStudent(self.studentString),
 			instance_of(Student)
+		)
+
+	def test_pesel_syntax(self):
+		assert_that(
+			deserializeStudent(self.studentString).pesel,
+			matches_regexp(r"^[0-9]{11}$")
 		)
 
 
