@@ -1,5 +1,6 @@
 from modules.Student import Student
 from modules.Grade import Grade
+from modules.Subject import Subject
 
 
 def serializeStudent(student: Student) -> str:
@@ -18,6 +19,10 @@ def serializeGrade(grade: Grade) -> str:
 		f"{grade.datetime};"
 		f"{grade.value.name}"
 	)
+
+
+def serializeSubject(subject: Subject) -> str:
+	return f"{subject.id};{subject.name}"
 
 
 def exportStudents(students: set[Student], filepath: str):

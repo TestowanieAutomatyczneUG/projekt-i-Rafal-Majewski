@@ -3,7 +3,8 @@ from modules.csvUtils import \
 	exportStudents, \
 	exportStudentsGrades, \
 	exportStudentGrades, \
-	deserializeStudent
+	deserializeStudent, \
+	serializeSubject
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -387,3 +388,9 @@ class Test_exportStudentGrades(unittest.TestCase):
 			],
 			any_order=True,
 		)
+
+
+class Test_serializeSubject(unittest.TestCase):
+	def test_correct_if_returns_correct_string(self):
+		subject = Subject(name="Matematyka", id="math")
+		self.assertEqual(serializeSubject(subject), "math;Matematyka")
