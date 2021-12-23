@@ -250,6 +250,32 @@ class Test_giveComment(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			teacherView.giveComment(student, comment)
 
+	def test_wrong_teacher(self):
+		teacher1 = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+		)
+		teacher2 = Teacher(
+			firstName="John2",
+			lastName="Smith2",
+			pesel="80062141433",
+		)
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		teacherView = TeacherView(teacher1)
+		datetime = Datetime(year=2020, month=1, day=1)
+		comment = Comment(
+			teacher=teacher2,
+			content="test",
+			datetime=datetime,
+		)
+		with self.assertRaises(ValueError):
+			teacherView.giveComment(student, comment)
+
 	def test_correct_return_value(self):
 		student = Student(
 			firstName="Jan",
