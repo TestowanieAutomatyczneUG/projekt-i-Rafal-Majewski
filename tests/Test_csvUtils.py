@@ -24,7 +24,9 @@ from hamcrest import \
 	empty, \
 	ends_with, \
 	contains_string, \
-	not_
+	not_, \
+	calling, \
+	raises
 
 
 def calculatePeselChecksum(peselPart: str):
@@ -76,6 +78,14 @@ class Test_serializeStudent(unittest.TestCase):
 		assert_that(
 			serializedStudent,
 			not_(ends_with("\n"))
+		)
+
+
+class Test_deserializeStudent_with_bad_strings(unittest.TestCase):
+	def test_missing_lastName(self):
+		assert_that(
+			calling(deserializeStudent).with_args("76072443188;Jan"),
+			raises(ValueError)
 		)
 
 
