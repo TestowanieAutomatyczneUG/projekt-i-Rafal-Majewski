@@ -75,3 +75,16 @@ class Test_exportStudents(unittest.TestCase):
 			],
 			any_order=True
 		)
+
+	def test_if_header_at_the_top(self):
+		students = [
+			Student(pesel="76072443188", firstName="Jan", lastName="Kowalski"),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudents(students, "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
+			[
+				unittest.mock.call("pesel;firstName;lastName\n"),
+				unittest.mock.call("76072443188;Jan;Kowalski\n"),
+			],
+		)
