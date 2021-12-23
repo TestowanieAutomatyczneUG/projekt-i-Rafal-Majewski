@@ -13,7 +13,7 @@ from modules.Teacher import Teacher
 from modules.GradeValue import GradeValue
 from modules.Grade import Grade
 from datetime import datetime as Datetime
-from hamcrest import assert_that, equal_to, has_length
+from hamcrest import assert_that, equal_to, has_length, instance_of
 
 
 @parameterized_class(
@@ -74,6 +74,12 @@ class Test_deserializeStudent(unittest.TestCase):
 		assert_that(
 			deserializeStudent(self.studentString).pesel,
 			has_length(11)
+		)
+
+	def test_instance(self):
+		assert_that(
+			deserializeStudent(self.studentString),
+			instance_of(Student)
 		)
 
 
