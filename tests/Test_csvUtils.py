@@ -22,7 +22,8 @@ from hamcrest import \
 	instance_of, \
 	matches_regexp, \
 	empty, \
-	ends_with
+	ends_with, \
+	contains_string
 
 
 def calculatePeselChecksum(peselPart: str):
@@ -61,6 +62,13 @@ def calculatePeselChecksum(peselPart: str):
 class Test_serializeStudent(unittest.TestCase):
 	def test_correct(self):
 		assert_that(serializeStudent(self.student), equal_to(self.expectedString))
+
+	def contains_semicolon(self):
+		serializedStudent = serializeStudent(self.student)
+		assert_that(
+			serializedStudent,
+			contains_string(";")
+		)
 
 
 @parameterized_class(
