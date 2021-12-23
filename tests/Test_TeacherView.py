@@ -23,6 +23,37 @@ class Test_TeacherView_constructor(unittest.TestCase):
 
 
 class Test_TeacherView_giveGrade(unittest.TestCase):
+	def test_teacher_not_assigned_to_grade(self):
+		subject = Subject(id="test", name="Math")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		teacher1 = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+			subjects=[subject]
+		)
+		teacher2 = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="80062141433",
+			subjects=[subject]
+		)
+		teacherView = TeacherView(teacher1)
+		datetime = Datetime(year=2020, month=1, day=1)
+		grade = Grade(
+			teacher=teacher2,
+			subject=subject,
+			datetime=datetime,
+			value=GradeValue.G3PLUS
+		)
+		with self.assertRaises(ValueError):
+			teacherView.giveGrade(student, grade)
+
 	def test_return_value(self):
 		subject = Subject(id="test", name="Math")
 		student = Student(
@@ -124,6 +155,37 @@ class Test_TeacherView_giveGrade(unittest.TestCase):
 
 
 class Test_takeGrade(unittest.TestCase):
+	def test_teacher_not_assigned_to_grade(self):
+		subject = Subject(id="test", name="Math")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		teacher1 = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+			subjects=[subject]
+		)
+		teacher2 = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="80062141433",
+			subjects=[subject]
+		)
+		teacherView = TeacherView(teacher1)
+		datetime = Datetime(year=2020, month=1, day=1)
+		grade = Grade(
+			teacher=teacher2,
+			subject=subject,
+			datetime=datetime,
+			value=GradeValue.G3PLUS
+		)
+		with self.assertRaises(ValueError):
+			teacherView.takeGrade(student, grade)
+
 	def test_return_value(self):
 		subject = Subject(id="test", name="Math")
 		student = Student(
