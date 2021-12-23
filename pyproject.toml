@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "ta-projekt-1"
+version = "0.0.0"
+description = "Electronic gradebook"
+authors = [
+    "Rafał Majewski <goodheropl@gmail.com>"
+]
+license = "CC0-1.0"
+readme = "README.md"
+homepage = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Majewski"
+repository = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Majewski"
+documentation = "https://github.com/TestowanieAutomatyczneUG/projekt-i-Rafal-Majewski"
+
+keywords = ["gradebook"]
+
+
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+uuid = "^1.30"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+nose2 = "^0.10.0"
+tox = "^3.24.4"
+mypy = "^0.910"
+pyproject-flake8 = "^0.0.1-alpha.2"
+coverage = "^6.2"
+nose = "^1.3.7"
+PyHamcrest = "^2.0.2"
+assertpy = "^1.1"
+parameterized = "^0.8.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = python-3-9, flake8, mypy
+skipsdist = true
+isolated_build = true
+
+
+[testenv:python-3-9]
+basepython = python3.9
+deps =
+	coverage
+	parameterized
+	PyHamcrest
+	nose-cprof
+	assertpy
+	pytest
+commands =
+	nosetests --ignore-files="email_confirmation.py" --nocapture --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
+
+[testenv:flake8]
+basepython = python3.9
+deps =
+	flake8
+commands =
+	flake8 src --ignore=W191,W503
+	flake8 tests --ignore=W191,W503
+	flake8 modules --ignore=W191,W503
+
+[testenv:mypy]
+basepython = python3.9
+deps =
+	mypy
+commands =
+	mypy src
+	mypy tests
+	mypy modules
+
+[gh-actions]
+python =
+	3.9: python-3-9, flake8, mypy
+"""
+
+[tool.flake8]
+ignore = [ "W191" ]
