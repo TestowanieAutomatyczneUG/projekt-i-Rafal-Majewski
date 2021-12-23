@@ -54,7 +54,7 @@ deps =
 	assertpy
 	pytest
 commands =
-	nosetests --nocapture --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
+	nosetests --ignore-files="email_confirmation.py" --nocapture --exe --with-coverage --cover-package=modules --cover-erase --with-doctest --with-cprofile --cprofile-stats-erase
 
 [testenv:flake8]
 basepython = python3.9
