@@ -8,7 +8,8 @@ from modules.csvUtils import \
 	serializeTeacher, \
 	exportSubjects, \
 	exportTeachers, \
-	exportTeacherSubjects
+	exportTeacherSubjects, \
+	exportTeachersSubjects
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -529,6 +530,52 @@ class Test_exportTeacherSubjects(unittest.TestCase):
 			[
 				unittest.mock.call("math\n"),
 				unittest.mock.call("subjectId\n"),
+			],
+			any_order=True,
+		)
+
+
+class Test_exportTeachersSubjects(unittest.TestCase):
+	def test_correct_if_opens(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="76072443188",
+			subjects=[subject],
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportTeachersSubjects([teacher], "test.csv")
+		mockOpen.assert_called_once_with("test.csv", "w")
+
+	def test_correct_if_writes_header(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="76072443188",
+			subjects=[subject],
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportTeachersSubjects([teacher], "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_any_call(
+			"pesel;subjectId\n"
+		)
+
+	def test_correct_if_writes_teachers_subjects(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="76072443188",
+			subjects=[subject],
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportTeachersSubjects([teacher], "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
+			[
+				unittest.mock.call("76072443188;math\n"),
+				unittest.mock.call("pesel;subjectId\n"),
 			],
 			any_order=True,
 		)

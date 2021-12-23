@@ -71,3 +71,11 @@ def exportTeacherSubjects(teacher: Teacher, filepath: str):
 		file.write("subjectId\n")
 		for subject in teacher.subjects:
 			file.write(f"{subject.id}\n")
+
+
+def exportTeachersSubjects(teachers: set[Teacher], filepath: str):
+	with open(filepath, "w") as file:
+		file.write("pesel;subjectId\n")
+		for teacher in teachers:
+			for subject in teacher.subjects:
+				file.write(f"{teacher.pesel};{subject.id}\n")
