@@ -24,3 +24,15 @@ def exportStudentsGrades(students: set[Student], filepath: str):
 					f"{grade.datetime};"
 					f"{grade.value.name}\n"
 				)
+
+
+def exportStudentGrades(student: Student, filepath: str):
+	with open(filepath, "w") as file:
+		file.write("teacherPesel;subjectId;datetime;value\n")
+		for grade in student.grades:
+			file.write(
+				f"{grade.teacher.pesel};"
+				f"{grade.subject.id};"
+				f"{grade.datetime};"
+				f"{grade.value.name}\n"
+			)

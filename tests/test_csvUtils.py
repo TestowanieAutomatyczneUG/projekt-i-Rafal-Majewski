@@ -1,7 +1,8 @@
 from modules.csvUtils import \
 	serializeStudent, \
 	exportStudents, \
-	exportStudentsGrades
+	exportStudentsGrades, \
+	exportStudentGrades
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -235,6 +236,80 @@ class Test_exportStudentsGrades(unittest.TestCase):
 				),
 				unittest.mock.call(
 					"studentPesel;teacherPesel;subjectId;datetime;value\n"
+				),
+			],
+			any_order=True,
+		)
+
+
+class Test_exportStudentGrades(unittest.TestCase):
+	def test_correct_if_opens(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		student = Student(
+			pesel="76072443188",
+			firstName="Jan",
+			lastName="Kowalski",
+			grades=[
+				Grade(
+					subject=subject,
+					teacher=teacher,
+					value=GradeValue.G2,
+					datetime=Datetime(2020, 1, 1)
+				),
+			],
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudentGrades(student, "test.csv")
+		mockOpen.assert_called_once_with("test.csv", "w")
+
+	def test_correct_if_writes_header(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		student = Student(
+			pesel="76072443188",
+			firstName="Jan",
+			lastName="Kowalski",
+			grades=[
+				Grade(
+					subject=subject,
+					teacher=teacher,
+					value=GradeValue.G2,
+					datetime=Datetime(2020, 1, 1)
+				),
+			],
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudentGrades(student, "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_any_call(
+			"teacherPesel;subjectId;datetime;value\n"
+		)
+
+	def test_correct_if_writes_grades(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		student = Student(
+			pesel="76072443188",
+			firstName="Jan",
+			lastName="Kowalski",
+			grades=[
+				Grade(
+					subject=subject,
+					teacher=teacher,
+					value=GradeValue.G2,
+					datetime=Datetime(2020, 1, 1)
+				),
+			],
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudentGrades(student, "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
+			[
+				unittest.mock.call(
+					"76072443188;math;2020-01-01 00:00:00;G2\n"
+				),
+				unittest.mock.call(
+					"teacherPesel;subjectId;datetime;value\n"
 				),
 			],
 			any_order=True,
