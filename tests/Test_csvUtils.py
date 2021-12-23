@@ -13,6 +13,7 @@ from modules.Teacher import Teacher
 from modules.GradeValue import GradeValue
 from modules.Grade import Grade
 from datetime import datetime as Datetime
+from hamcrest import assert_that, equal_to
 
 
 @parameterized_class(
@@ -42,7 +43,7 @@ from datetime import datetime as Datetime
 )
 class Test_serializeStudent(unittest.TestCase):
 	def test_correct(self):
-		self.assertEqual(serializeStudent(self.student), self.expectedString)
+		assert_that(serializeStudent(self.student), equal_to(self.expectedString))
 
 
 @parameterized_class(
@@ -64,8 +65,9 @@ class Test_serializeStudent(unittest.TestCase):
 )
 class Test_deserializeStudent(unittest.TestCase):
 	def test_correct(self):
-		self.assertEqual(
-			deserializeStudent(self.studentString), self.expectedStudent
+		assert_that(
+			deserializeStudent(self.studentString),
+			equal_to(self.expectedStudent)
 		)
 
 
