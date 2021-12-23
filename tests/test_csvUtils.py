@@ -2,11 +2,12 @@ from modules.csvUtils import \
 	serializeStudent, \
 	exportStudents, \
 	exportStudentsGrades, \
-	exportStudentGrades
+	exportStudentGrades, \
+	deserializeStudent
 import unittest
 import unittest.mock
 from modules.Student import Student
-from parameterized import parameterized_class  # type: ignore
+from parameterized import parameterized_class, parameterized  # type: ignore
 from modules.Subject import Subject
 from modules.Teacher import Teacher
 from modules.GradeValue import GradeValue
@@ -42,6 +43,27 @@ from datetime import datetime as Datetime
 class Test_serializeStudent(unittest.TestCase):
 	def test_correct(self):
 		self.assertEqual(serializeStudent(self.student), self.expectedString)
+
+
+class Test_deserializeStudent(unittest.TestCase):
+	@parameterized.expand(
+		[
+			(
+				"76072443188;Jan;Kowalski",
+				Student(pesel="76072443188", firstName="Jan", lastName="Kowalski")
+			),
+			(
+				"86110298656;Adam;Nowak",
+				Student(pesel="86110298656", firstName="Adam", lastName="Nowak")
+			),
+			(
+				"05320732334;Anna;Kowalska",
+				Student(pesel="05320732334", firstName="Anna", lastName="Kowalska")
+			),
+		]
+	)
+	def test_correct(self, studentString: str, expectedStudent: Student):
+		self.assertEqual(deserializeStudent(studentString), expectedStudent)
 
 
 class Test_exportStudents(unittest.TestCase):

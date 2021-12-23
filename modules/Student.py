@@ -84,3 +84,15 @@ class Student(Person):
 			grade for grade in self.__grades if grade.subject is not subject
 		])
 		return self._unassignSubject(subject)
+
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, Student):
+			return False
+		return (
+			self.firstName == other.firstName
+			and self.lastName == other.lastName
+			and self.pesel == other.pesel
+		)
+
+	def __hash__(self) -> int:
+		return hash(self.pesel)

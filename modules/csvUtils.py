@@ -6,6 +6,11 @@ def serializeStudent(student: Student) -> str:
 	return f"{student.pesel};{student.firstName};{student.lastName}"
 
 
+def deserializeStudent(studentString: str) -> Student:
+	[pesel, firstName, lastName] = studentString.split(";")
+	return Student(pesel=pesel, firstName=firstName, lastName=lastName)
+
+
 def serializeGrade(grade: Grade) -> str:
 	return (
 		f"{grade.teacher.pesel};"
