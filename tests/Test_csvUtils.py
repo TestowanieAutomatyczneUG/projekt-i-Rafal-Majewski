@@ -4,7 +4,8 @@ from modules.csvUtils import \
 	exportStudentsGrades, \
 	exportStudentGrades, \
 	deserializeStudent, \
-	serializeSubject
+	serializeSubject, \
+	serializeTeacher
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -394,3 +395,9 @@ class Test_serializeSubject(unittest.TestCase):
 	def test_correct_if_returns_correct_string(self):
 		subject = Subject(name="Matematyka", id="math")
 		self.assertEqual(serializeSubject(subject), "math;Matematyka")
+
+
+class Test_serializeTeacher(unittest.TestCase):
+	def test_correct_if_returns_correct_string(self):
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		self.assertEqual(serializeTeacher(teacher), "76072443188;Jan;Kowalski")
