@@ -50,3 +50,10 @@ def exportStudentGrades(student: Student, filepath: str):
 		file.write("teacherPesel;subjectId;datetime;value\n")
 		for grade in student.grades:
 			file.write(serializeGrade(grade) + "\n")
+
+
+def exportSubjects(subjects: set[Subject], filepath: str):
+	with open(filepath, "w") as file:
+		file.write("id;name\n")
+		for subject in subjects:
+			file.write(serializeSubject(subject) + "\n")

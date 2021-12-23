@@ -5,7 +5,8 @@ from modules.csvUtils import \
 	exportStudentGrades, \
 	deserializeStudent, \
 	serializeSubject, \
-	serializeTeacher
+	serializeTeacher, \
+	exportSubjects
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -427,3 +428,31 @@ class Test_serializeTeacher(unittest.TestCase):
 	def test_correct_if_returns_correct_string(self):
 		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
 		self.assertEqual(serializeTeacher(teacher), "76072443188;Jan;Kowalski")
+
+
+class Test_exportSubjects(unittest.TestCase):
+	def test_correct_if_opens(self):
+		subject = Subject(name="Matematyka", id="math")
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportSubjects([subject], "test.csv")
+		mockOpen.assert_called_once_with("test.csv", "w")
+
+	def test_correct_if_writes_header(self):
+		subject = Subject(name="Matematyka", id="math")
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportSubjects([subject], "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_any_call(
+			"id;name\n"
+		)
+
+	def test_correct_if_writes_subjects(self):
+		subject = Subject(name="Matematyka", id="math")
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportSubjects([subject], "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
+			[
+				unittest.mock.call("math;Matematyka\n"),
+				unittest.mock.call("id;name\n"),
+			],
+			any_order=True,
+		)
