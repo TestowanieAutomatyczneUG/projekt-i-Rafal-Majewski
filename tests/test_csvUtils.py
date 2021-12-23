@@ -1,5 +1,6 @@
-from modules.csvUtils import serializeStudent
+from modules.csvUtils import serializeStudent, exportStudents
 import unittest
+import unittest.mock
 from modules.Student import Student
 from parameterized import parameterized_class  # type: ignore
 
@@ -32,3 +33,15 @@ from parameterized import parameterized_class  # type: ignore
 class Test_serializeStudent(unittest.TestCase):
 	def test_correct(self):
 		self.assertEqual(serializeStudent(self.student), self.expectedString)
+
+
+class Test_exportStudents(unittest.TestCase):
+	def test_correct_if_opens(self):
+		students = [
+			Student(pesel="76072443188", firstName="Jan", lastName="Kowalski"),
+			Student(pesel="86110298656", firstName="Adam", lastName="Nowak"),
+			Student(pesel="05320732334", firstName="Anna", lastName="Kowalska"),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudents(students, "test.csv")
+		mockOpen.assert_called_once_with("test.csv", "w")
