@@ -2,6 +2,7 @@ from modules.Person import Person
 from modules.Subject import Subject
 from modules.Grade import Grade
 from modules.Teacher import Teacher
+from modules.Comment import Comment
 
 
 def validateSubject(subject: Subject) -> None:
@@ -19,6 +20,11 @@ def validateTeacher(teacher: Teacher) -> None:
 		raise TypeError("Teacher must be a Teacher object")
 
 
+def validateComment(comment: Comment) -> None:
+	if not isinstance(comment, Comment):
+		raise TypeError("Comment must be a Comment object")
+
+
 class Student(Person):
 	def __init__(
 		self,
@@ -28,6 +34,7 @@ class Student(Person):
 		pesel: str,
 		subjects: set[Subject] = None,
 		grades: set[Grade] = None,
+		comments: set[Comment] = None
 	) -> None:
 		super().__init__(firstName=firstName, lastName=lastName, pesel=pesel)
 		self.__subjects = set[Subject]()
@@ -38,6 +45,10 @@ class Student(Person):
 		if grades is not None:
 			for grade in grades:
 				self.addGrade(grade)
+		self.__comments = set[Comment]()
+		if comments is not None:
+			for comment in comments:
+				self.addComment(comment)
 
 	def assignSubject(self, subject: Subject) -> Subject:
 		validateSubject(subject)
@@ -67,6 +78,22 @@ class Student(Person):
 		validateGrade(grade)
 		self.__grades.remove(grade)
 		return grade
+
+	@property
+	def comments(self) -> frozenset[Comment]:
+		return frozenset(self.__comments)
+
+	def addComment(self, comment: Comment) -> Comment:
+		validateComment(comment)
+		self.__comments.add(comment)
+		return comment
+
+	def removeComment(self, comment: Comment) -> Comment:
+		validateComment(comment)
+		if comment not in self.__comments:
+			raise ValueError("Comment is not assigned to this student")
+		self.__comments.remove(comment)
+		return comment
 
 	@property
 	def grades(self) -> frozenset[Grade]:

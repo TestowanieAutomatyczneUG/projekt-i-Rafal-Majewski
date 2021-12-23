@@ -4,6 +4,7 @@ from modules.Subject import Subject
 from modules.Grade import Grade
 from modules.GradeValue import GradeValue
 from modules.Teacher import Teacher
+from modules.Comment import Comment
 from datetime import datetime as Datetime
 
 
@@ -32,6 +33,32 @@ class Test_Student_constructor(unittest.TestCase):
 			subjects=subjects
 		)
 		self.assertEqual(student.subjects, subjects)
+
+	def test_with_comments(self):
+		teacher = Teacher(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		comments = set([
+			Comment(
+				teacher=teacher,
+				datetime=Datetime(2020, 1, 1),
+				content="Test"
+			),
+			Comment(
+				teacher=teacher,
+				datetime=Datetime(2020, 1, 1),
+				content="Test2"
+			),
+		])
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			comments=comments
+		)
+		self.assertEqual(student.comments, comments)
 
 
 class Test_edit_Student(unittest.TestCase):
@@ -179,3 +206,61 @@ class Test_addGrade(unittest.TestCase):
 		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
 		with self.assertRaises(TypeError):
 			student.addGrade("grade")
+
+
+class Test_addComment(unittest.TestCase):
+	def test_wrong_type(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		with self.assertRaises(TypeError):
+			student.addComment("comment")
+
+	def test_correct_return_value(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		comment = Comment(
+			datetime=Datetime(2018, 1, 1),
+			teacher=teacher,
+			content="test"
+		)
+		self.assertIs(student.addComment(comment), comment)
+
+	def test_correct_if_adds(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		comment = Comment(
+			datetime=Datetime(2018, 1, 1),
+			teacher=teacher,
+			content="test"
+		)
+		student.addComment(comment)
+		self.assertIn(comment, student.comments)
+
+
+class Test_removeComment(unittest.TestCase):
+	def test_if_removes(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		comment = Comment(
+			datetime=Datetime(2018, 1, 1),
+			teacher=teacher,
+			content="test"
+		)
+		student.addComment(comment)
+		student.removeComment(comment)
+		self.assertNotIn(comment, student.comments)
+
+	def test_wrong_type(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		with self.assertRaises(TypeError):
+			student.removeComment("comment")
+
+	def test_nonexistent(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		comment = Comment(
+			datetime=Datetime(2018, 1, 1),
+			teacher=teacher,
+			content="test"
+		)
+		with self.assertRaises(ValueError):
+			student.removeComment(comment)
