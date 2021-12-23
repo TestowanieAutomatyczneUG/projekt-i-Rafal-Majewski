@@ -23,7 +23,8 @@ from hamcrest import \
 	matches_regexp, \
 	empty, \
 	ends_with, \
-	contains_string
+	contains_string, \
+	not_
 
 
 def calculatePeselChecksum(peselPart: str):
@@ -68,6 +69,13 @@ class Test_serializeStudent(unittest.TestCase):
 		assert_that(
 			serializedStudent,
 			contains_string(";")
+		)
+
+	def test_no_newline_at_the_end(self):
+		serializedStudent = serializeStudent(self.student)
+		assert_that(
+			serializedStudent,
+			not_(ends_with("\n"))
 		)
 
 
