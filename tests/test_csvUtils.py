@@ -45,3 +45,18 @@ class Test_exportStudents(unittest.TestCase):
 		with unittest.mock.patch("builtins.open") as mockOpen:
 			exportStudents(students, "test.csv")
 		mockOpen.assert_called_once_with("test.csv", "w")
+
+	def test_correct_if_writes_header(self):
+		students = [
+			Student(pesel="76072443188", firstName="Jan", lastName="Kowalski"),
+			Student(pesel="86110298656", firstName="Adam", lastName="Nowak"),
+			Student(pesel="05320732334", firstName="Anna", lastName="Kowalska"),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudents(students, "test.csv")
+		self.assertEqual(
+			mockOpen.return_value.__enter__.return_value.write.call_args_list,
+			[
+				unittest.mock.call("pesel;firstName;lastName\n"),
+			]
+		)
