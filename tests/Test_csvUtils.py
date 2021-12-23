@@ -9,7 +9,8 @@ from modules.csvUtils import \
 	exportSubjects, \
 	exportTeachers, \
 	exportTeacherSubjects, \
-	exportTeachersSubjects
+	exportTeachersSubjects, \
+	exportGradebook
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -19,6 +20,7 @@ from modules.Teacher import Teacher
 from modules.GradeValue import GradeValue
 from modules.Grade import Grade
 from datetime import datetime as Datetime
+from modules.Gradebook import Gradebook
 from hamcrest import \
 	assert_that, \
 	equal_to, \
@@ -576,6 +578,25 @@ class Test_exportTeachersSubjects(unittest.TestCase):
 			[
 				unittest.mock.call("76072443188;math\n"),
 				unittest.mock.call("pesel;subjectId\n"),
+			],
+			any_order=True,
+		)
+
+
+class Test_exportGradebook(unittest.TestCase):
+	def test_if_opens(self):
+		gradebook = Gradebook(
+			schoolName="Szkoła Podstawowa nr 1",
+		)
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportGradebook(gradebook, "test")
+		mockOpen.assert_has_calls(
+			[
+				unittest.mock.call("test/students.csv", "w"),
+				unittest.mock.call("test/studentsGrades.csv", "w"),
+				unittest.mock.call("test/subjects.csv", "w"),
+				unittest.mock.call("test/teachers.csv", "w"),
+				unittest.mock.call("test/teachersSubjects.csv", "w"),
 			],
 			any_order=True,
 		)
