@@ -231,6 +231,25 @@ class Test_takeGrade(unittest.TestCase):
 
 
 class Test_giveComment(unittest.TestCase):
+	def test_wrong_type(self):
+		subject = Subject(id="test", name="Math")
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+			subjects=[subject]
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+			subjects=[subject]
+		)
+		teacherView = TeacherView(teacher)
+		comment = 2
+		with self.assertRaises(TypeError):
+			teacherView.giveComment(student, comment)
+
 	def test_correct_return_value(self):
 		student = Student(
 			firstName="Jan",
