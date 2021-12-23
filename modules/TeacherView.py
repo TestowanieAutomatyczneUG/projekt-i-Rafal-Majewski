@@ -2,6 +2,7 @@ from modules.PersonView import PersonView
 from modules.Teacher import Teacher
 from modules.Student import Student
 from modules.Grade import Grade
+from modules.Comment import Comment
 
 
 class TeacherView(PersonView):
@@ -22,3 +23,17 @@ class TeacherView(PersonView):
 		if grade.subject not in self.__teacher.subjects:
 			raise ValueError("Subject is not assigned to teacher.")
 		return student.removeGrade(grade)
+
+	def giveComment(self, student: Student, comment: Comment) -> Comment:
+		if not isinstance(comment, Comment):
+			raise TypeError("Comment must be a Comment object")
+		if comment.teacher is not self.__teacher:
+			raise ValueError("Comment is not assigned to this teacher.")
+		return student._addComment(comment)
+
+	def takeComment(self, student: Student, comment: Comment) -> Comment:
+		if not isinstance(comment, Comment):
+			raise TypeError("Comment must be a Comment object")
+		if comment.teacher is not self.__teacher:
+			raise ValueError("Comment is not assigned to this teacher.")
+		return student._removeComment(comment)

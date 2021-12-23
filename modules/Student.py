@@ -83,17 +83,23 @@ class Student(Person):
 	def comments(self) -> frozenset[Comment]:
 		return frozenset(self.__comments)
 
+	def _addComment(self, comment: Comment) -> Comment:
+		self.__comments.add(comment)
+		return comment
+
 	def addComment(self, comment: Comment) -> Comment:
 		validateComment(comment)
-		self.__comments.add(comment)
+		return self._addComment(comment)
+
+	def _removeComment(self, comment: Comment) -> Comment:
+		self.__comments.remove(comment)
 		return comment
 
 	def removeComment(self, comment: Comment) -> Comment:
 		validateComment(comment)
 		if comment not in self.__comments:
 			raise ValueError("Comment is not assigned to this student")
-		self.__comments.remove(comment)
-		return comment
+		return self._removeComment(comment)
 
 	@property
 	def grades(self) -> frozenset[Grade]:

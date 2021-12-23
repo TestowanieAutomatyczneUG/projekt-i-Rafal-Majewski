@@ -5,6 +5,7 @@ from modules.Student import Student
 from modules.Grade import Grade
 from modules.Subject import Subject
 from modules.GradeValue import GradeValue
+from modules.Comment import Comment
 from datetime import datetime as Datetime
 
 
@@ -227,3 +228,91 @@ class Test_takeGrade(unittest.TestCase):
 		teacher.unassignSubject(subject)
 		with self.assertRaises(ValueError):
 			teacherView.takeGrade(student, grade)
+
+
+class Test_giveComment(unittest.TestCase):
+	def test_correct_return_value(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		comment = Comment(
+			teacher=teacher,
+			datetime=datetime,
+			content="test"
+		)
+		self.assertIs(teacherView.giveComment(student, comment), comment)
+
+	def test_if_adds(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		comment = Comment(
+			teacher=teacher,
+			datetime=datetime,
+			content="test"
+		)
+		teacherView.giveComment(student, comment)
+		self.assertIn(comment, student.comments)
+
+
+class Test_takeComment(unittest.TestCase):
+	def test_correct_return_value(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		comment = Comment(
+			teacher=teacher,
+			datetime=datetime,
+			content="test"
+		)
+		teacherView.giveComment(student, comment)
+		self.assertIs(teacherView.takeComment(student, comment), comment)
+
+	def test_if_removes(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		comment = Comment(
+			teacher=teacher,
+			datetime=datetime,
+			content="test"
+		)
+		teacherView.giveComment(student, comment)
+		teacherView.takeComment(student, comment)
+		self.assertNotIn(comment, student.comments)
