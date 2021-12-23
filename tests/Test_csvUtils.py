@@ -19,7 +19,16 @@ from hamcrest import \
 	has_length, \
 	instance_of, \
 	matches_regexp, \
-	empty
+	empty, \
+	ends_with
+
+
+def calculatePeselChecksum(peselPart: str):
+	weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
+	checksum = 10 - sum(
+		weight * int(digit) for weight, digit in zip(weights, peselPart)
+	) % 10
+	return checksum
 
 
 @parameterized_class(
@@ -98,6 +107,13 @@ class Test_deserializeStudent(unittest.TestCase):
 		assert_that(
 			deserializeStudent(self.studentString).grades,
 			empty()
+		)
+
+	def test_pesel_checksum(self):
+		student = deserializeStudent(self.studentString)
+		assert_that(
+			student.pesel,
+			ends_with(str(calculatePeselChecksum(student.pesel[:-1])))
 		)
 
 
