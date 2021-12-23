@@ -264,3 +264,9 @@ class Test_removeComment(unittest.TestCase):
 		)
 		with self.assertRaises(ValueError):
 			student.removeComment(comment)
+
+
+class Test_magic_methods(unittest.TestCase):
+	def test_eq_with_wrong_type(self):
+		student = Student(firstName="Jan", lastName="Kowalski", pesel="85052342517")
+		self.assertFalse(student == "student")
