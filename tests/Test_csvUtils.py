@@ -6,7 +6,8 @@ from modules.csvUtils import \
 	deserializeStudent, \
 	serializeSubject, \
 	serializeTeacher, \
-	exportSubjects
+	exportSubjects, \
+	exportTeachers
 import unittest
 import unittest.mock
 from modules.Student import Student
@@ -453,6 +454,34 @@ class Test_exportSubjects(unittest.TestCase):
 			[
 				unittest.mock.call("math;Matematyka\n"),
 				unittest.mock.call("id;name\n"),
+			],
+			any_order=True,
+		)
+
+
+class Test_exportTeachers(unittest.TestCase):
+	def test_correct_if_opens(self):
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportTeachers([teacher], "test.csv")
+		mockOpen.assert_called_once_with("test.csv", "w")
+
+	def test_correct_if_writes_header(self):
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportTeachers([teacher], "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_any_call(
+			"pesel;firstName;lastName\n"
+		)
+
+	def test_correct_if_writes_teachers(self):
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportTeachers([teacher], "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
+			[
+				unittest.mock.call("76072443188;Jan;Kowalski\n"),
+				unittest.mock.call("pesel;firstName;lastName\n"),
 			],
 			any_order=True,
 		)

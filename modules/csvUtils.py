@@ -57,3 +57,10 @@ def exportSubjects(subjects: set[Subject], filepath: str):
 		file.write("id;name\n")
 		for subject in subjects:
 			file.write(serializeSubject(subject) + "\n")
+
+
+def exportTeachers(teachers: set[Teacher], filepath: str):
+	with open(filepath, "w") as file:
+		file.write("pesel;firstName;lastName\n")
+		for teacher in teachers:
+			file.write(serializeTeacher(teacher) + "\n")
