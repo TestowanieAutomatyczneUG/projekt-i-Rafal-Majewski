@@ -63,7 +63,7 @@ class Test_serializeStudent(unittest.TestCase):
 	def test_correct(self):
 		assert_that(serializeStudent(self.student), equal_to(self.expectedString))
 
-	def contains_semicolon(self):
+	def test_contains_semicolon(self):
 		serializedStudent = serializeStudent(self.student)
 		assert_that(
 			serializedStudent,
