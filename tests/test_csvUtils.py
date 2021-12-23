@@ -1,8 +1,16 @@
-from modules.csvUtils import serializeStudent, exportStudents
+from modules.csvUtils import \
+	serializeStudent, \
+	exportStudents, \
+	exportStudentsGrades
 import unittest
 import unittest.mock
 from modules.Student import Student
 from parameterized import parameterized_class  # type: ignore
+from modules.Subject import Subject
+from modules.Teacher import Teacher
+from modules.GradeValue import GradeValue
+from modules.Grade import Grade
+from datetime import datetime as Datetime
 
 
 @parameterized_class(
@@ -87,4 +95,147 @@ class Test_exportStudents(unittest.TestCase):
 				unittest.mock.call("pesel;firstName;lastName\n"),
 				unittest.mock.call("76072443188;Jan;Kowalski\n"),
 			],
+		)
+
+
+class Test_exportStudentsGrades(unittest.TestCase):
+	def test_correct_if_opens(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		students = [
+			Student(
+				pesel="76072443188",
+				firstName="Jan",
+				lastName="Kowalski",
+				grades=[
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G2,
+						datetime=Datetime(2020, 1, 1)
+					),
+				],
+			),
+			Student(
+				pesel="86110298656",
+				firstName="Adam",
+				lastName="Nowak",
+				grades=[
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G3PLUS,
+						datetime=Datetime(2020, 12, 13)
+					),
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G6,
+						datetime=Datetime(2019, 3, 13)
+					),
+				],
+			),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudentsGrades(students, "test.csv")
+		mockOpen.assert_called_once_with("test.csv", "w")
+
+	def test_correct_if_writes_header(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="85032929358")
+		students = [
+			Student(
+				pesel="76072443188",
+				firstName="Jan",
+				lastName="Kowalski",
+				grades=[
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G2,
+						datetime=Datetime(2020, 1, 1)
+					),
+				],
+			),
+			Student(
+				pesel="86110298656",
+				firstName="Adam",
+				lastName="Nowak",
+				grades=[
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G3PLUS,
+						datetime=Datetime(2020, 12, 13)
+					),
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G6,
+						datetime=Datetime(2019, 3, 13)
+					),
+				],
+			),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudentsGrades(students, "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_any_call(
+			"studentPesel;teacherPesel;subjectId;datetime;value\n"
+		)
+
+	def test_correct_if_writes_grades(self):
+		subject = Subject(name="Matematyka", id="math")
+		teacher = Teacher(firstName="Jan", lastName="Kowalski", pesel="76072443188")
+		students = [
+			Student(
+				pesel="76072443188",
+				firstName="Jan",
+				lastName="Kowalski",
+				grades=[
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G2,
+						datetime=Datetime(2020, 1, 1)
+					),
+				],
+			),
+			Student(
+				pesel="86110298656",
+				firstName="Adam",
+				lastName="Nowak",
+				grades=[
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G3PLUS,
+						datetime=Datetime(2020, 12, 13)
+					),
+					Grade(
+						subject=subject,
+						teacher=teacher,
+						value=GradeValue.G6,
+						datetime=Datetime(2019, 3, 13)
+					),
+				],
+			),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudentsGrades(students, "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
+			[
+				unittest.mock.call(
+					"76072443188;76072443188;math;2020-01-01 00:00:00;G2\n"
+				),
+				unittest.mock.call(
+					"86110298656;76072443188;math;2019-03-13 00:00:00;G6\n"
+				),
+				unittest.mock.call(
+					"86110298656;76072443188;math;2020-12-13 00:00:00;G3PLUS\n"
+				),
+				unittest.mock.call(
+					"studentPesel;teacherPesel;subjectId;datetime;value\n"
+				),
+			],
+			any_order=True,
 		)
