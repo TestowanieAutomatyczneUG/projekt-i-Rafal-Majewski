@@ -54,9 +54,24 @@ class Test_exportStudents(unittest.TestCase):
 		]
 		with unittest.mock.patch("builtins.open") as mockOpen:
 			exportStudents(students, "test.csv")
-		self.assertEqual(
-			mockOpen.return_value.__enter__.return_value.write.call_args_list,
+		mockOpen.return_value.__enter__.return_value.write.assert_any_call(
+			"pesel;firstName;lastName\n"
+		)
+
+	def test_correct_if_writes_students(self):
+		students = [
+			Student(pesel="76072443188", firstName="Jan", lastName="Kowalski"),
+			Student(pesel="86110298656", firstName="Adam", lastName="Nowak"),
+			Student(pesel="05320732334", firstName="Anna", lastName="Kowalska"),
+		]
+		with unittest.mock.patch("builtins.open") as mockOpen:
+			exportStudents(students, "test.csv")
+		mockOpen.return_value.__enter__.return_value.write.assert_has_calls(
 			[
 				unittest.mock.call("pesel;firstName;lastName\n"),
-			]
+				unittest.mock.call("76072443188;Jan;Kowalski\n"),
+				unittest.mock.call("86110298656;Adam;Nowak\n"),
+				unittest.mock.call("05320732334;Anna;Kowalska\n"),
+			],
+			any_order=True
 		)

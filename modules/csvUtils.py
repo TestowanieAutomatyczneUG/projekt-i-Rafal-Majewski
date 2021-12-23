@@ -8,3 +8,5 @@ def serializeStudent(student: Student) -> str:
 def exportStudents(students: set[Student], filepath: str):
 	with open(filepath, "w") as file:
 		file.write("pesel;firstName;lastName\n")
+		for student in students:
+			file.write(serializeStudent(student) + "\n")
