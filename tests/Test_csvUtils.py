@@ -18,7 +18,8 @@ from hamcrest import \
 	equal_to, \
 	has_length, \
 	instance_of, \
-	matches_regexp
+	matches_regexp, \
+	empty
 
 
 @parameterized_class(
@@ -91,6 +92,12 @@ class Test_deserializeStudent(unittest.TestCase):
 		assert_that(
 			deserializeStudent(self.studentString).pesel,
 			matches_regexp(r"^[0-9]{11}$")
+		)
+
+	def test_if_starts_with_no_grades(self):
+		assert_that(
+			deserializeStudent(self.studentString).grades,
+			empty()
 		)
 
 
