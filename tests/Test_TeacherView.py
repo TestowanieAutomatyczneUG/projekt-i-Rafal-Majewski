@@ -361,3 +361,25 @@ class Test_takeComment(unittest.TestCase):
 		teacherView.giveComment(student, comment)
 		teacherView.takeComment(student, comment)
 		self.assertNotIn(comment, student.comments)
+
+	def test_wrong_type(self):
+		student = Student(
+			firstName="Jan",
+			lastName="Kowalski",
+			pesel="85052342517",
+		)
+		teacher = Teacher(
+			firstName="John",
+			lastName="Smith",
+			pesel="96071361238",
+		)
+		teacherView = TeacherView(teacher)
+		datetime = Datetime(year=2020, month=1, day=1)
+		comment = Comment(
+			teacher=teacher,
+			datetime=datetime,
+			content="test"
+		)
+		teacherView.giveComment(student, comment)
+		with self.assertRaises(TypeError):
+			teacherView.takeComment(student, 2)
